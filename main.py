@@ -1,4 +1,6 @@
 from sanic import Sanic, response as res
+from database import getAllPredictions, createPrediction
+
 
 app = Sanic(__name__)
 
@@ -11,13 +13,10 @@ app = Sanic(__name__)
 
 @app.get('/rest/predictions')
 async def get_predictions(req):
-    from database import getAllPredictions
     return res.json(await getAllPredictions())
 
 @app.post('/rest/predictions')
 async def post_prediction(req):
-    from database import createPrediction
-
     prediction =req.json
 
     prediction['id'] = await createPrediction(prediction)

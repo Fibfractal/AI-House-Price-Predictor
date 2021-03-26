@@ -34,4 +34,4 @@ def predict(TotRmsAbvGrd, YearBuilt, LandContour, BsmtFinSF1, GarageCars, _1stFl
     input = [TotRmsAbvGrd, YearBuilt, BsmtFinSF1, GarageCars, _1stFlrSF, TotalBsmtSF, _2ndFlrSF, GrLivArea, OverallQual, LandContour[0], LandContour[1], LandContour[2], LandContour[3]]
     price_prediction = xgboost.predict(np.reshape(np.array(input),(-1,13)))[0]
 
-    return { 'Prediction' : price_prediction }
+    return  price_prediction

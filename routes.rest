@@ -1,0 +1,14 @@
+POST http://127.0.0.1:5000/api/predict
+
+{
+  "TotRmsAbvGrd": 8,
+  "YearBuilt": 2003,
+  "LandContour": [0,0,0,1],
+  "BsmtFinSF1": 706,
+  "GarageCars": 2,
+  "_1stFlrSF": 856,
+  "TotalBsmtSF": 856,
+  "_2ndFlrSF": 854,
+  "GrLivArea": 1710,
+  "OverallQual": 7
+}

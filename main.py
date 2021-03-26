@@ -1,12 +1,18 @@
 from sanic import Sanic, response as res
 from database import getAllPredictions, createPrediction
+from xgboost_regression_model import predict, train_model
 
-
+train_model()
 app = Sanic(__name__)
 
-
 # Endpoints for AI model
+@app.post('/api/predict')
+async def prediction(req):
 
+    input = req.json
+    pred_price = predict(input['TotRmsAbvGrd'], input['YearBuilt'], input['LandContour'], input['BsmtFinSF1'], input['GarageCars'], input['_1stFlrSF'], input['TotalBsmtSF'], input['_2ndFlrSF'], input['GrLivArea'], input['OverallQual'])
+
+    return res.json(str(pred_price))
 
 
 # Endpoints for database table predictions
@@ -22,7 +28,6 @@ async def post_prediction(req):
     prediction['id'] = await createPrediction(prediction)
     return res.json(prediction)
 
-
-
 if __name__ == "__main__":
-    app.run(port = 8000)
+    app.run(port = 5000)
+x

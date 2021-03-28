@@ -20,14 +20,15 @@ async def prediction(req):
 @app.get('/rest/predictions')
 async def get_predictions(req):
     return res.json(await getAllPredictions())
+    
 
 @app.post('/rest/predictions')
 async def post_prediction(req):
     prediction =req.json
-
-    prediction['id'] = await createPrediction(prediction)
+    
+    prediction['Id'] = await createPrediction(prediction)
     return res.json(prediction)
+
 
 if __name__ == "__main__":
     app.run(port = 5000)
-x

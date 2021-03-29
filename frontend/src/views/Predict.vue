@@ -52,7 +52,7 @@
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
-                    
+
                     <!-- Made own css class, else it wasn't validated properly by form. Removed the bootstrap class="form-select" -->
                     <div class="form-group">
                         <select class="drop-down-own" v-model="overallQual" aria-label="Default select example">
@@ -112,11 +112,7 @@ export default {
     },
     methods: {
 
-        predict(){
-
-            if(this.landContour == ''){
-                console.log('This is empty')
-            }
+        async predict(){
 
             console.log(this.totRmsAbvGrd)
             console.log(this.yearBuilt)
@@ -142,12 +138,36 @@ export default {
             }
 
             console.log(toModel)
+
+            let dataToPredict = {
+
+                TotRmsAbvGrd: this.totRmsAbvGrd,
+                YearBuilt: this.yearBuilt,
+                LandContour: toModel,
+                BsmtFinSF1: this.bsmtFinSF1,
+
+                GarageCars: this.garageCars,
+                _1stFlrSF: this._1stFlrSF,
+                TotalBsmtSF: this.totalBsmtSF,
+                _2ndFlrSF: this._2ndFlrSF,
+
+                GrLivArea: this.grLivArea,
+                OverallQual:this.overallQual
+            }
+
+
+            console.log(dataToPredict)
+
+
+            let res = await fetch('/api/predict', {
+                method: 'POST',
+                body: JSON.stringify(dataToPredict)
+            })
+
+            let prediction = await res.json()
+
+            console.log("Prediction:", prediction)
         }, 
-        formatLandContourData(){
-
-        }
-
-
     }
 }
 </script>

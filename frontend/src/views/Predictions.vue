@@ -40,7 +40,7 @@ export default {
     },
 
     mounted(){
-        this.$store.dispatch('initPredictions')
+        this.$store.dispatch('initPredictions');
         let canvas = document.getElementById("myChart");
         let ctx = canvas.getContext("2d");
         this.canvas = ctx;
@@ -56,16 +56,18 @@ export default {
     methods: {
         prepdata(){
             let choice = this.value;
-            console.log(choice)
             for (let i = 0; i < this.predictions.length; i++){
-                let datapoint = {
-                    x: this.predictions[i][choice].value,
-                    y: this.predictions[i].PredictedPrice,
-                };
-                this.datapoints.push(datapoint)
+                for (let key in this.predictions[i]) {
+                    if (key == choice) {
+                        let datapoint = {
+                            x: this.predictions[i][key],
+                            y: this.predictions[i].PredictedPrice,
+                        };
+                        this.datapoints.push(datapoint);
+                    }
+                }
             }; 
             console.log(this.datapoints)
-
         },
 
         createChart() {
@@ -77,16 +79,7 @@ export default {
             data: {
                 datasets: [{
                     label: 'Scatter Dataset',
-                    data: [{
-                        x: 1,
-                        y: 3
-                    }, {
-                        x: 7,
-                        y: 10
-                    }, {
-                        x: 10,
-                        y: 5
-                    }],
+                    data: this.datapoints,
                     showLine:true,
                 }]
             },

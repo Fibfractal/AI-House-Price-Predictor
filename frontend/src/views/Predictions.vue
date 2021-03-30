@@ -70,29 +70,32 @@ export default {
         createChart() {
             this.chart = new Chart(this.canvas, {
             // The type of chart we want to create
-            type: "line",
+            type: "scatter",
 
             // The data for our dataset
             data: {
-                labels: [
-                    'Red', 
-                    'Blue', 
-                    'Yellow', 
-                    'Green',
-                ],
-                datasets: [
-                    {
-                    label: 'Earlier Predictions',
-                    backgroundColor: ['red', 'blue', 'yellow', 'green'],
-                    borderColor: 'black',
-                    data: [30, 10, 5, 20],
-                    order: 0
+                datasets: [{
+                    label: 'Scatter Dataset',
+                    data: [{
+                        x: -10,
+                        y: 0
+                    }, {
+                        x: 0,
+                        y: 10
+                    }, {
+                        x: 10,
+                        y: 5
+                    }],
+                    showLine:true,
                 }]
             },
-
-            // Configuration options go here
             options: {
-
+                scales: {
+                    xAxes: [{
+                        type: 'linear',
+                        position: 'bottom'
+                    }]
+                },
             }
         });
 

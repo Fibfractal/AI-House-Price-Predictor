@@ -40,6 +40,7 @@ export default {
     },
 
     mounted(){
+        this.$store.dispatch('initPredictions')
         let canvas = document.getElementById("myChart");
         let ctx = canvas.getContext("2d");
         this.canvas = ctx;
@@ -48,7 +49,7 @@ export default {
 
     computed: {
         predictions() {
-        return this.$store.state.predictions
+            return this.$store.state.predictions
         }
     },
 
@@ -56,14 +57,14 @@ export default {
         prepdata(){
             let choice = this.value;
             console.log(choice)
-            for (prediction in this.predictions){
+            for (let i = 0; i < this.predictions.length; i++){
                 let datapoint = {
-                    x: this.prediction[choice],
-                    y: this.prediction[PredictedPrice]
+                    x: this.predictions[i][choice].value,
+                    y: this.predictions[i].PredictedPrice,
                 };
                 this.datapoints.push(datapoint)
-                console.log(this.datapoints)
-            } 
+            }; 
+            console.log(this.datapoints)
 
         },
 
@@ -77,10 +78,10 @@ export default {
                 datasets: [{
                     label: 'Scatter Dataset',
                     data: [{
-                        x: -10,
-                        y: 0
+                        x: 1,
+                        y: 3
                     }, {
-                        x: 0,
+                        x: 7,
                         y: 10
                     }, {
                         x: 10,

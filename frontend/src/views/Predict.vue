@@ -2,88 +2,107 @@
     <main class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-4 p-4 data-input-col">
+                
+                <h3>Make a prediction</h3>
+
+                <p>Fill out the form below to predict a price of a house</p>
+                <p class="directives">All input fields must be filled, fields 1 - 8 must be integers, 9 - 10 is drop down menus</p>
+
 
                 <form @submit.prevent="predict" class="was-validated">
 
-                    <div class="form-group">
-                        <input v-model="grLivArea" type="text" class="form-control" id="uname" placeholder="Enter the living area above gound in square feet (integer)" name="uname" required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
+                    <ol>
+                        <li>
+                            <div class="form-group m-3">
+                                <input v-model="grLivArea" type="text" class="form-control" id="uname" placeholder="Enter the living area above gound in square feet (integer)" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group m-3">
+                                <input v-model="_1stFlrSF" type="text" class="form-control" id="uname" placeholder="Enter the area of the first floor in square feet (integer)" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group m-3">
+                                <input v-model="_2ndFlrSF" type="text" class="form-control" id="uname" placeholder="Enter the area of the second floor in square feet (enter 0 if you don't have)" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group m-3">
+                                <input v-model="totalBsmtSF" type="text" class="form-control" id="uname" placeholder="Enter the total area of basement in square feet (enter 0 if you don't have)" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group m-3">
+                                <input v-model="bsmtFinSF1" type="text" class="form-control" id="uname" placeholder="Enter the finished area of the basement in square feet (enter 0 if you don't have)" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div> 
+                        </li>
 
-                    <div class="form-group">
-                        <input v-model="_1stFlrSF" type="text" class="form-control" id="uname" placeholder="Enter the area of the first floor in square feet (integer)" name="uname" required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
-
-                    <div class="form-group">
-                        <input v-model="_2ndFlrSF" type="text" class="form-control" id="uname" placeholder="Enter the area of the second floor in square feet (integer, if don't have enter 0)" name="uname" required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
-
-                    <div class="form-group">
-                        <input v-model="totalBsmtSF" type="text" class="form-control" id="uname" placeholder="Enter the total area of basement in square feet (integer, if don't have enter 0)" name="uname" required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
-
-                    <div class="form-group">
-                        <input v-model="bsmtFinSF1" type="text" class="form-control" id="uname" placeholder="Enter the finished area of the basement in square feet (integer, if don't have enter 0)" name="uname" required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>   
-
-                    <div class="form-group">
-                        <input v-model="totRmsAbvGrd" type="text" class="form-control" id="uname" placeholder="Enter the total number of rooms above ground, does not include bathrooms (integer)" name="uname" required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
-
-                    <div class="form-group">
-                        <input v-model="garageCars" type="text" class="form-control" id="uname" placeholder="Enter the capacity of the garage in number of cars (integer, if don't have enter 0)" name="uname" required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
-
-                    <div class="form-group">
-                        <input v-model="yearBuilt" type="text" class="form-control" id="uname" placeholder="Enter the year built (integer)" name="uname" required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
-
-                    <!-- Made own css class, else it wasn't validated properly by form. Removed the bootstrap class="form-select" -->
-                    <div class="form-group">
-                        <select class="drop-down-own" v-model="overallQual" aria-label="Default select example" required>
-                            <option selected>- Select the overall material finish of the house -</option>
-                            <option value="10">Very Excellent</option>
-                            <option value="9">Excellent</option>
-                            <option value="8">Very Good</option>
-                            <option value="7">Good</option>
-                            <option value="6">Above Average</option>
-                            <option value="5">Average</option>
-                            <option value="4">Below Average</option>
-                            <option value="3">Fair</option>
-                            <option value="2">Poor</option>
-                            <option value="1">Very Poor</option>
-                        </select>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>               
-                    </div>
-
-                    <div class="form-group">
-                        <select class="drop-down-own" v-model="landContour" aria-label="Default select example" required>
-                            <option selected>- Select the flatness of the property -</option>
-                            <option value="Lvl">Near Flat/Level</option>
-                            <option value="Bnk">Banked - Quick and significant rise from street grade to building</option>
-                            <option value="HLS">Hillside - Significant slope from side to side</option>
-                            <option value="Low">Depression</option>
-                        </select>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>               
-                    </div>
-
+                        <li>
+                            <div class="form-group m-3">
+                                <input v-model="totRmsAbvGrd" type="text" class="form-control" id="uname" placeholder="Enter the total number of rooms above ground, does not include bathrooms (integer)" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group m-3">
+                                <input v-model="garageCars" type="text" class="form-control" id="uname" placeholder="Enter the capacity of the garage in number of cars (enter 0 if you don't have)" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group m-3">
+                                <input v-model="yearBuilt" type="text" class="form-control" id="uname" placeholder="Enter the year built (integer)" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group m-3">
+                                <select class="drop-down-own" v-model="overallQual" aria-label="Default select example" required>
+                                    <option selected>- Select the overall material finish of the house -</option>
+                                    <option value="10">Very Excellent</option>
+                                    <option value="9">Excellent</option>
+                                    <option value="8">Very Good</option>
+                                    <option value="7">Good</option>
+                                    <option value="6">Above Average</option>
+                                    <option value="5">Average</option>
+                                    <option value="4">Below Average</option>
+                                    <option value="3">Fair</option>
+                                    <option value="2">Poor</option>
+                                    <option value="1">Very Poor</option>
+                                </select>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>               
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group m-3">
+                                <select class="drop-down-own" v-model="landContour" aria-label="Default select example" required>
+                                    <option selected>- Select the flatness of the property -</option>
+                                    <option value="Lvl">Near Flat/Level</option>
+                                    <option value="Bnk">Banked - Quick and significant rise from street grade to building</option>
+                                    <option value="HLS">Hillside - Significant slope from side to side</option>
+                                    <option value="Low">Depression</option>
+                                </select>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>               
+                            </div>
+                        </li>
+                    </ol>
+ 
                     <button type="submit" class="btn btn-secondary m-4">Submit</button>
                 </form>                                
             </div>
@@ -104,118 +123,148 @@ export default {
             yearBuilt: '',
             landContour: '',
             bsmtFinSF1: '',
-
             garageCars: '',
             _1stFlrSF: '',
             totalBsmtSF: '',
             _2ndFlrSF: '',
-
             grLivArea: '',
             overallQual: '',
-
-            price: 0
+            price: 0,
         }
     },
     methods: {
 
         async predict(){
 
-            console.log(this.totRmsAbvGrd)
-            console.log(this.yearBuilt)
-            console.log(this.landContour)
-            console.log(this.bsmtFinSF1)
+            if(this.inputControl()){
 
-            console.log(this.garageCars)
-            console.log(this._1stFlrSF)
-            console.log(this.totalBsmtSF)
-            console.log(this._2ndFlrSF)
+                console.log("I am in input control")
 
-            console.log(this.grLivArea)
-            console.log(this.overallQual)
+                console.log(this.totRmsAbvGrd)
+                console.log(this.yearBuilt)
+                console.log(this.landContour)
+                console.log(this.bsmtFinSF1)
 
-            // Onehot encoded variable
+                console.log(this.garageCars)
+                console.log(this._1stFlrSF)
+                console.log(this.totalBsmtSF)
+                console.log(this._2ndFlrSF)
 
-            let toModel = [0,0,0,0]
-            let _landContour = ["Low","HLS", "Bnk", "Lvl" ]
+                console.log(this.grLivArea)
+                console.log(this.overallQual)
 
-            for (var i = 0; i < _landContour.length; i++) {
-                if(this.landContour === _landContour[i] ){
-                     toModel[i] = 1
-                }
-            }
+                // Onehot encoded variable
 
-            console.log(toModel)
+                let toModel = [0,0,0,0]
+                let _landContour = ["Low","HLS", "Bnk", "Lvl" ]
 
-            // To trained model
-
-            let dataToPredict = {
-
-                TotRmsAbvGrd: this.totRmsAbvGrd,
-                YearBuilt: this.yearBuilt,
-                LandContour: toModel,
-                BsmtFinSF1: this.bsmtFinSF1,
-
-                GarageCars: this.garageCars,
-                _1stFlrSF: this._1stFlrSF,
-                TotalBsmtSF: this.totalBsmtSF,
-                _2ndFlrSF: this._2ndFlrSF,
-
-                GrLivArea: this.grLivArea,
-                OverallQual:this.overallQual
-            }
-
-
-            console.log(dataToPredict)
-
-
-            let res = await fetch('/api/predict', {
-                method: 'POST',
-                body: JSON.stringify(dataToPredict)
-            })
-
-            let prediction = await res.json()
-            console.log("Prediction:", prediction)
-
-            // Set global variable and store prediction
-
-            this.price = prediction
-            this.$store.commit('setPrediction', prediction)
-            console.log("Prediction in store", this.$store.state.prediction)
-
-            // To database
-
-            let dataToDatabase = {
-                TotRmsAbvGrd: this.totRmsAbvGrd,
-                YearBuilt: this.yearBuilt,
-                LandContour: this.landContour,
-                BsmtFinSF1: this.bsmtFinSF1,
-                GarageCars: this.garageCars,
-                _1stFlrSF: this._1stFlrSF,
-                TotalBsmtSF: this.totalBsmtSF,
-                _2ndFlrSF: this._2ndFlrSF,
-                GrLivArea: this.grLivArea,
-                OverallQual: this.overallQual,
-                PredictedPrice: prediction
+                for (var i = 0; i < _landContour.length; i++) {
+                    if(this.landContour === _landContour[i] ){
+                        toModel[i] = 1
+                    }
                 }
 
+                console.log(toModel)
 
-            let result = await fetch('/rest/predictions', {
-                method: 'POST',
-                body: JSON.stringify(dataToDatabase)
-            })
+                // To trained model
 
-            let dataFromDatabase = await result.json()
-            console.log("from database", dataFromDatabase)
+                let dataToPredict = {
 
-            // Add the new predict to store predictions
+                    TotRmsAbvGrd: this.totRmsAbvGrd,
+                    YearBuilt: this.yearBuilt,
+                    LandContour: toModel,
+                    BsmtFinSF1: this.bsmtFinSF1,
 
-            console.log("Before:",this.$store.state.predictions)
-            this.$store.commit('appendPrediction', dataFromDatabase)
-            console.log("After:", this.$store.state.predictions)
+                    GarageCars: this.garageCars,
+                    _1stFlrSF: this._1stFlrSF,
+                    TotalBsmtSF: this.totalBsmtSF,
+                    _2ndFlrSF: this._2ndFlrSF,
+
+                    GrLivArea: this.grLivArea,
+                    OverallQual:this.overallQual
+                }       
+                
+                console.log(dataToPredict)
+                
+
+                let res = await fetch('/api/predict', {
+                    method: 'POST',
+                    body: JSON.stringify(dataToPredict)
+                })
+
+                let prediction = await res.json()
+                console.log("Prediction:", prediction)
+
+                // Set global variable and store prediction
+
+                this.price = prediction
+                this.$store.commit('setPrediction', prediction)
+                console.log("Prediction in store", this.$store.state.prediction)
+
+                // To database
+
+                let dataToDatabase = {
+                    TotRmsAbvGrd: this.totRmsAbvGrd,
+                    YearBuilt: this.yearBuilt,
+                    LandContour: this.landContour,
+                    BsmtFinSF1: this.bsmtFinSF1,
+                    GarageCars: this.garageCars,
+                    _1stFlrSF: this._1stFlrSF,
+                    TotalBsmtSF: this.totalBsmtSF,
+                    _2ndFlrSF: this._2ndFlrSF,
+                    GrLivArea: this.grLivArea,
+                    OverallQual: this.overallQual,
+                    PredictedPrice: prediction
+                    }
 
 
+                let result = await fetch('/rest/predictions', {
+                    method: 'POST',
+                    body: JSON.stringify(dataToDatabase)
+                })
 
+                let dataFromDatabase = await result.json()
+                console.log("from database", dataFromDatabase)
+
+                // Add the new predict to store predictions
+
+                console.log("Before:",this.$store.state.predictions)
+                this.$store.commit('appendPrediction', dataFromDatabase)
+                console.log("After:", this.$store.state.predictions)
+            }
         }, 
+        inputControl(){
+
+            let integerInputFields = {
+
+                Input_Row_1: this.grLivArea,
+                Input_Row_2: this._1stFlrSF,
+                Input_Row_3: this._2ndFlrSF,
+                Input_Row_4: this.totalBsmtSF,
+                Input_Row_5: this.bsmtFinSF1,
+                Input_Row_6: this.totRmsAbvGrd,
+                Input_Row_7: this.garageCars,
+                Input_Row_8: this.yearBuilt,
+            }
+
+            let inputOk = true
+            let userMessage = ''
+
+            for(var key in integerInputFields){
+
+                if(!/^\d+$/.test(integerInputFields[key])){
+
+                    userMessage += key + " is not an integer!\n" 
+                    inputOk = false
+                }
+            }
+
+            if(!inputOk){
+                alert(userMessage + "No prediction was performed!")
+            }
+
+            return inputOk
+        }
     }
 }
 </script>
@@ -233,4 +282,11 @@ export default {
         height: 38px;
         border-radius: 4px;
     }
+
+    .directives {
+        float: left;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
 </style>

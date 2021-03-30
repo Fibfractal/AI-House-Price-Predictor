@@ -55,7 +55,7 @@
 
                     <!-- Made own css class, else it wasn't validated properly by form. Removed the bootstrap class="form-select" -->
                     <div class="form-group">
-                        <select class="drop-down-own" v-model="overallQual" aria-label="Default select example">
+                        <select class="drop-down-own" v-model="overallQual" aria-label="Default select example" required>
                             <option selected>- Select the overall material finish of the house -</option>
                             <option value="10">Very Excellent</option>
                             <option value="9">Excellent</option>
@@ -67,17 +67,21 @@
                             <option value="3">Fair</option>
                             <option value="2">Poor</option>
                             <option value="1">Very Poor</option>
-                        </select>               
+                        </select>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>               
                     </div>
 
                     <div class="form-group">
-                        <select class="drop-down-own" v-model="landContour" aria-label="Default select example">
+                        <select class="drop-down-own" v-model="landContour" aria-label="Default select example" required>
                             <option selected>- Select the flatness of the property -</option>
                             <option value="Lvl">Near Flat/Level</option>
                             <option value="Bnk">Banked - Quick and significant rise from street grade to building</option>
                             <option value="HLS">Hillside - Significant slope from side to side</option>
                             <option value="Low">Depression</option>
-                        </select>               
+                        </select>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>               
                     </div>
 
                     <button type="submit" class="btn btn-secondary m-4">Submit</button>

@@ -14,6 +14,9 @@ export default {
   name: 'App',
   components: {
     Navbar
-  }
+  },
+  created() {
+    this.$store.dispatch("initPredictions")
+  },
 }
 </script>

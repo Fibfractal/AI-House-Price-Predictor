@@ -7,7 +7,7 @@ const state = {
 
 const mutations = {
     setPrediction(state, prediction){
-        state,prediction = prediction
+        state.prediction = prediction
     },
     setPredictions(state, predictionsList){
         state.predictions = predictionsList

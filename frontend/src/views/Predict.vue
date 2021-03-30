@@ -174,11 +174,13 @@ export default {
             })
 
             let prediction = await res.json()
-
             console.log("Prediction:", prediction)
 
-            this.price = parseFloat(prediction)
-            this.$store.commit('setPrediction', parseFloat(prediction))
+            // Set global variable and store prediction
+
+            this.price = prediction
+            this.$store.commit('setPrediction', prediction)
+            console.log("Prediction in store", this.$store.state.prediction)
 
             // To database
 
@@ -203,8 +205,16 @@ export default {
             })
 
             let dataFromDatabase = await result.json()
-
             console.log("from database", dataFromDatabase)
+
+            // Add the new predict to store predictions
+
+            console.log("Before:",this.$store.state.predictions)
+            this.$store.commit('appendPrediction', dataFromDatabase)
+            console.log("After:", this.$store.state.predictions)
+
+
+
         }, 
     }
 }

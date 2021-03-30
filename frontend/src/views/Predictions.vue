@@ -3,7 +3,6 @@
       <div class="row">
           <div class="col-4">
                 <h4>Filter</h4>
-                <p>{{ predictions }}</p>  <!-- Test - shall be removed -->
                 <select @change="prepdata" class="form-select" aria-label="Default select example" v-model="value">
                     <option disabled value="">Choose filter parameter</option>
                     <option value="TotRmsAbvGrd">Total rooms above ground</option>
@@ -35,7 +34,7 @@ export default {
             canvas:"",
             chart:"",
             value:"",
-            datapoints:[]
+            array:[]
         };
     },
 
@@ -56,21 +55,27 @@ export default {
     methods: {
         prepdata(){
             let choice = this.value;
+            let array = []
             for (let i = 0; i < this.predictions.length; i++){
                 for (let key in this.predictions[i]) {
                     if (key == choice) {
+
+                        let xvalue = this.predictions[i][key]
+                        let yvalue = this.predictions[i].PredictedPrice
                         let datapoint = {
-                            x: this.predictions[i][key],
-                            y: this.predictions[i].PredictedPrice,
+                            x: xvalue,
+                            y: yvalue,
                         };
-                        this.datapoints.push(datapoint);
+                        array.push(datapoint); 
                     }
                 }
             }; 
-            console.log(this.datapoints)
+            this.createChart(array)
+            console.log(array)
+        
         },
 
-        createChart() {
+        createChart(array) {
             this.chart = new Chart(this.canvas, {
             // The type of chart we want to create
             type: "scatter",
@@ -79,7 +84,7 @@ export default {
             data: {
                 datasets: [{
                     label: 'Scatter Dataset',
-                    data: this.datapoints,
+                    data: array,
                     showLine:true,
                 }]
             },

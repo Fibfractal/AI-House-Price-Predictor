@@ -3,18 +3,19 @@
       <div class="row">
           <div class="col-4">
                 <h4>Filter</h4>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Choose filter parameter</option>
-                    <option value="1">Total rooms above ground</option>
-                    <option value="2">Year built</option>
-                    <option value="3">Land contour</option>
-                    <option value="4">Finished basement area</option>
-                    <option value="5">Garage space</option>
-                    <option value="6">First floor area</option>
-                    <option value="7">Total basement area</option>
-                    <option value="8">Second floor area</option>
-                    <option value="9">Ground living area</option>
-                    <option value="10">Overall Quality</option>
+                <p>{{ predictions }}</p>  <!-- Test - shall be removed -->
+                <select @change="prepdata" class="form-select" aria-label="Default select example" v-model="value">
+                    <option disabled value="">Choose filter parameter</option>
+                    <option value="TotRmsAbvGrd">Total rooms above ground</option>
+                    <option value="YearBuilt">Year built</option>
+                    <option value="LandContour">Land contour</option>
+                    <option value="BsmtFinSF1">Finished basement area</option>
+                    <option value="GarageCars">Garage space</option>
+                    <option value="_1stFlrSF">First floor area</option>
+                    <option value="TotalBsmtSF">Total basement area</option>
+                    <option value="_2ndFlrSF">Second floor area</option>
+                    <option value="GrLivArea">Ground living area</option>
+                    <option value="OverallQual">Overall Quality</option>
                 </select>
           </div>
           <div class="col-8">
@@ -31,10 +32,10 @@ import Chart from 'chart.js'
 export default {
     data(){
         return {
-
             canvas:"",
             chart:"",
-            chosentype:""
+            value:"",
+            datapoints:[]
         };
     },
 
@@ -45,8 +46,27 @@ export default {
         this.createChart()
     },
 
+    computed: {
+        predictions() {
+        return this.$store.state.predictions
+        }
+    },
 
     methods: {
+        prepdata(){
+            let choice = this.value;
+            console.log(choice)
+            for (prediction in this.predictions){
+                let datapoint = {
+                    x: this.prediction[choice],
+                    y: this.prediction[PredictedPrice]
+                };
+                this.datapoints.push(datapoint)
+                console.log(this.datapoints)
+            } 
+
+        },
+
         createChart() {
             this.chart = new Chart(this.canvas, {
             // The type of chart we want to create

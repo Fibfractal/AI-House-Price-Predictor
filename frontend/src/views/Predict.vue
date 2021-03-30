@@ -130,6 +130,7 @@ export default {
             console.log(this.overallQual)
 
             // Onehot encoded variable
+
             let toModel = [0,0,0,0]
             let _landContour = ["Low","HLS", "Bnk", "Lvl" ]
 
@@ -140,6 +141,8 @@ export default {
             }
 
             console.log(toModel)
+
+            // To trained model
 
             let dataToPredict = {
 
@@ -173,6 +176,31 @@ export default {
             this.price = parseFloat(prediction)
             this.$store.commit('setPrediction', parseFloat(prediction))
 
+            // To database
+
+            let dataToDatabase = {
+                TotRmsAbvGrd: this.totRmsAbvGrd,
+                YearBuilt: this.yearBuilt,
+                LandContour: this.landContour,
+                BsmtFinSF1: this.bsmtFinSF1,
+                GarageCars: this.garageCars,
+                _1stFlrSF: this._1stFlrSF,
+                TotalBsmtSF: this.totalBsmtSF,
+                _2ndFlrSF: this._2ndFlrSF,
+                GrLivArea: this.grLivArea,
+                OverallQual: this.overallQual,
+                PredictedPrice: prediction
+                }
+
+
+            let result = await fetch('/rest/predictions', {
+                method: 'POST',
+                body: JSON.stringify(dataToDatabase)
+            })
+
+            let dataFromDatabase = await result.json()
+
+            console.log("from database", dataFromDatabase)
         }, 
     }
 }

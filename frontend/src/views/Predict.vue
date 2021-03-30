@@ -108,6 +108,8 @@ export default {
 
             grLivArea: '',
             overallQual: '',
+
+            price: 0
         }
     },
     methods: {
@@ -167,6 +169,10 @@ export default {
             let prediction = await res.json()
 
             console.log("Prediction:", prediction)
+
+            this.price = parseFloat(prediction)
+            this.$store.commit('setPrediction', parseFloat(prediction))
+
         }, 
     }
 }

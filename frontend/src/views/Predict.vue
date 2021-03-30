@@ -108,7 +108,7 @@
             </div>
 
             <div class="col-12 col-md-8 p-4 display-prediction-col">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere unde repudiandae debitis impedit necessitatibus perspiciatis quaerat quibusdam sequi enim laudantium!</p>
+                <img src="src\assets\buildings1.jpg" class="img-fluid" alt="Responsive image">
             </div>
         </div>
     </main>

@@ -41,6 +41,7 @@ export default {
             value:"",
             array1:[],
             array:[],
+            labarray:[],
         };
     },
 
@@ -67,31 +68,34 @@ export default {
         createPriceArray(){
             // Create an array with only the predicted prices
             let array1 = []
+            let labarray = []
             
             for (let i = 0; i < this.predictions.length; i++){
                 let yvalue = this.predictions[i].PredictedPrice
                 
                 array1.push(yvalue); 
+                labarray.push(i+1);
             }
-            console.log(array1);
-        this.create1DChart(array1)
+        this.create1DChart(array1,labarray)
 
         },
 
-        create1DChart(array1) {
+        create1DChart(array1, labarray) {
+            console.log('Begin 1D' + array1)
             this.chart = new Chart(this.canvas, {
                 
                 // Creates a line chart
                 type: 'line',
                 data: {
+                    labels: labarray,
                     datasets: [{
                         label: 'Predicted Price',
                         data: array1,
                         backgroundColor: '#FFCAD4',
                         borderColor: '#F4ACB7',
                         borderWidth: 2,
-                        showLine: true,
-                        lineTension: 0,
+                        //showLine: true,
+                        //lineTension: 0,
                     }]
                 },
                 options: {
@@ -109,6 +113,7 @@ export default {
                     
                 }
             });
+            console.log('End 1D' + array1)
         },
     
         prepdata(){
@@ -129,6 +134,10 @@ export default {
                         }
                     }
                 }; 
+
+                array.sort((a,b) => {
+                    return a.x - b.x;
+                });
                 this.create2DChart(array)
             }
             else{

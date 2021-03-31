@@ -34,16 +34,9 @@ export default {
             canvas:"",
             chart:"",
             value:"",
-            array:[]
+            array1:[],
+            array:[],
         };
-    },
-
-    mounted(){
-        this.$store.dispatch('initPredictions');
-        let canvas = document.getElementById("myChart");
-        let ctx = canvas.getContext("2d");
-        this.canvas = ctx;
-        this.createChart()
     },
 
     computed: {
@@ -52,7 +45,56 @@ export default {
         }
     },
 
+    created(){
+        this.$store.dispatch('initPredictions');
+    },
+
+    mounted(){
+        let canvas = document.getElementById("myChart");
+        let ctx = canvas.getContext("2d");
+        this.canvas = ctx;
+        this.createPriceArray();
+        
+    },
+
     methods: {
+
+        createPriceArray(){
+            // Create an array with only the predicted prices
+            let array1 = []
+            
+            for (let i = 0; i < this.predictions.length; i++){
+                let yvalue = this.predictions[i].PredictedPrice
+                
+                array1.push(yvalue); 
+            }
+            console.log(array1);
+        this.create1DChart(array1)
+
+        },
+
+        create1DChart(array1) {
+            this.chart = new Chart(this.canvas, {
+                
+                // Creates a line chart
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Line Chart',
+                        data: array1,
+                        backgroundColor: 'red',
+                        borderColor: 'red',
+                        borderWidth: 1,
+                        showLine: true,
+                        lineTension: 0,
+                    }]
+                },
+                options: {
+                    
+                }
+            });
+        },
+    
         prepdata(){
             let choice = this.value;
             let array = []
@@ -70,37 +112,39 @@ export default {
                     }
                 }
             }; 
-            this.createChart(array)
-            console.log(array)
-        
+            this.create2DChart(array)
         },
 
-        createChart(array) {
+        
+        create2DChart(array) {
             this.chart = new Chart(this.canvas, {
-            // The type of chart we want to create
-            type: "scatter",
+                // The type of chart we want to create
+                type: "scatter",
 
-            // The data for our dataset
-            data: {
-                datasets: [{
-                    label: 'Scatter Dataset',
-                    data: array,
-                    showLine:true,
-                }]
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                        type: 'linear',
-                        position: 'bottom'
+                // The data for our dataset
+                data: {
+                    datasets: [{
+                        label: 'Scatter Dataset',
+                        data: array,
+                        showLine:true,
+                        lineTension:0,
                     }]
                 },
-            }
-        });
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: 'linear',
+                            position: 'bottom'
+                        }]
+                    },
+                }
+            })
 
+        },
     },
-  },
-};
+}
+
+
 </script>
 
 <style scoped>

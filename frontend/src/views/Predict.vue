@@ -255,21 +255,26 @@ export default {
                     OverallQual: this.overallQual,
                     PredictedPrice: prediction
                 }
-    
-    
-                let result = await fetch('/rest/predictions', {
-                    method: 'POST',
-                    body: JSON.stringify(dataToDatabase)
-                })
-    
-                let dataFromDatabase = await result.json()
-                console.log("from database", dataFromDatabase)
-    
-                // Add the new predict to store predictions
-    
-                console.log("Before:",this.$store.state.predictions)
-                this.$store.commit('appendPrediction', dataFromDatabase)
-                console.log("After:", this.$store.state.predictions)
+
+                try {
+                    
+                    let result = await fetch('/rest/predictions', {
+                        method: 'POST',
+                        body: JSON.stringify(dataToDatabase)
+                    })
+        
+                    let dataFromDatabase = await result.json()
+                    console.log("from database", dataFromDatabase)
+        
+                    // Add the new predict to store predictions
+        
+                    console.log("Before:",this.$store.state.predictions)
+                    this.$store.commit('appendPrediction', dataFromDatabase)
+                    console.log("After:", this.$store.state.predictions)
+                }
+                catch(err) {
+                    this.price = "Error, the prediction data wasn't added to the data base!"
+                }
             }
             else{
                 this.price = "Something went wrong try again!"

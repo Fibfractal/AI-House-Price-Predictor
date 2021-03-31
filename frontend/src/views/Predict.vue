@@ -115,7 +115,7 @@
                         <div class="row">
 
                             <div class="col-12 col-md-4 mt-4">
-                                <div class="card" style="width: 100%; background-color: rgb(219, 211, 219)">
+                                <div class="card" style="width: 100%; background-color: white;">
                                 <div class="card-body">
                                     <h4 class="card-title">Prediction:</h4>
                                     <h6 class="card-subtitle mb-2 text-muted">Accuray of 88 %</h6>
@@ -221,47 +221,54 @@ export default {
             let prediction = await res.json()
             console.log("Prediction:", prediction)
 
-            // Set global variable and store prediction
+            if(prediction > 0){
 
-            let priceFormat =  new Intl.NumberFormat('en-US',
-                { style: 'currency', currency: 'USD',
-                    minimumFractionDigits: 0 });
-
-            this.price = priceFormat.format(parseInt(prediction))
-
-            this.$store.commit('setPrediction', prediction)
-            console.log("Prediction in store", this.$store.state.prediction)
-
-            // To database
-
-            let dataToDatabase = {
-                TotRmsAbvGrd: this.totRmsAbvGrd,
-                YearBuilt: this.yearBuilt,
-                LandContour: this.landContour,
-                BsmtFinSF1: this.bsmtFinSF1,
-                GarageCars: this.garageCars,
-                _1stFlrSF: this._1stFlrSF,
-                TotalBsmtSF: this.totalBsmtSF,
-                _2ndFlrSF: this._2ndFlrSF,
-                GrLivArea: this.grLivArea,
-                OverallQual: this.overallQual,
-                PredictedPrice: prediction
+                // Set global variable and store prediction
+    
+                let priceFormat =  new Intl.NumberFormat('en-US',
+                    { style: 'currency', currency: 'USD',
+                        minimumFractionDigits: 0 });
+    
+                this.price = priceFormat.format(parseInt(prediction))
+    
+                this.$store.commit('setPrediction', prediction)
+                console.log("Prediction in store", this.$store.state.prediction)
+    
+                // To database
+    
+                let dataToDatabase = {
+                    TotRmsAbvGrd: this.totRmsAbvGrd,
+                    YearBuilt: this.yearBuilt,
+                    LandContour: this.landContour,
+                    BsmtFinSF1: this.bsmtFinSF1,
+                    GarageCars: this.garageCars,
+                    _1stFlrSF: this._1stFlrSF,
+                    TotalBsmtSF: this.totalBsmtSF,
+                    _2ndFlrSF: this._2ndFlrSF,
+                    GrLivArea: this.grLivArea,
+                    OverallQual: this.overallQual,
+                    PredictedPrice: prediction
+                }
+    
+    
+                let result = await fetch('/rest/predictions', {
+                    method: 'POST',
+                    body: JSON.stringify(dataToDatabase)
+                })
+    
+                let dataFromDatabase = await result.json()
+                console.log("from database", dataFromDatabase)
+    
+                // Add the new predict to store predictions
+    
+                console.log("Before:",this.$store.state.predictions)
+                this.$store.commit('appendPrediction', dataFromDatabase)
+                console.log("After:", this.$store.state.predictions)
+            }
+            else{
+                this.price = "Something went wrong try again!"
             }
 
-
-            let result = await fetch('/rest/predictions', {
-                method: 'POST',
-                body: JSON.stringify(dataToDatabase)
-            })
-
-            let dataFromDatabase = await result.json()
-            console.log("from database", dataFromDatabase)
-
-            // Add the new predict to store predictions
-
-            console.log("Before:",this.$store.state.predictions)
-            this.$store.commit('appendPrediction', dataFromDatabase)
-            console.log("After:", this.$store.state.predictions)
         }, 
     }
 }
@@ -272,7 +279,7 @@ export default {
         background-color: rgb(199, 206, 204);
     }
     .display-prediction-col {
-        background-color: rgb(219, 211, 219);
+        background-color: white;
     }
 
     .drop-down-own {

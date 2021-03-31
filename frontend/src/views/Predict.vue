@@ -71,7 +71,7 @@
                         <li>
                             <div class="form-group m-3">
                                 <select class="drop-down-own" v-model="overallQual" aria-label="Default select example" required>
-                                    <option selected>- Select the overall material finish of the house -</option>
+                                    <option value="" disabled selected>- Select the overall material finish of the house -</option>
                                     <option value="10">Very Excellent</option>
                                     <option value="9">Excellent</option>
                                     <option value="8">Very Good</option>
@@ -90,7 +90,7 @@
                         <li>
                             <div class="form-group m-3">
                                 <select class="drop-down-own" v-model="landContour" aria-label="Default select example" required>
-                                    <option selected>- Select the flatness of the property -</option>
+                                    <option value="" disabled selected>- Select the flatness of the property -</option>
                                     <option value="Lvl">Near Flat/Level</option>
                                     <option value="Bnk">Banked - Quick and significant rise from street grade to building</option>
                                     <option value="HLS">Hillside - Significant slope from side to side</option>
@@ -103,6 +103,8 @@
                     </ol>
  
                     <button type="submit" class="btn btn-secondary m-4">Submit</button>
+                    <button type="reset" class="btn btn-secondary m-4" @click="emptyVariables">Reset</button>
+
                 </form>                                
             </div>
                     <div class="col-12 col-md-8 p-4 display-prediction-col">
@@ -281,6 +283,21 @@ export default {
             }
 
         }, 
+        emptyVariables(){
+            
+            this.totRmsAbvGrd = ''
+            this.yearBuilt = ''
+            this.landContour = ''
+            this.bsmtFinSF1 = ''
+
+            this.garageCars = ''
+            this._1stFlrSF = ''
+            this.totalBsmtSF = ''
+            this._2ndFlrSF = ''
+
+            this.grLivArea = ''
+            this.overallQual = ''
+        }
     }
 }
 </script>

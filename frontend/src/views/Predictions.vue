@@ -39,7 +39,6 @@ export default {
             canvas:"",
             chart:"",
             value:"",
-            array1:[],
             array:[],
             labarray:[],
         };
@@ -67,21 +66,24 @@ export default {
 
         createPriceArray(){
             // Create an array with only the predicted prices
-            let array1 = []
+            let array = []
             let labarray = []
             
             for (let i = 0; i < this.predictions.length; i++){
                 let yvalue = this.predictions[i].PredictedPrice
                 
-                array1.push(yvalue); 
+                // Array that contains Predicted Price for all predictions done
+                array.push(yvalue); 
+                
+                // Labels array needed for Line Chart - counted from 1 up for number of predictions 
                 labarray.push(i+1);
             }
-        this.create1DChart(array1,labarray)
+        this.create1DChart(array,labarray)
 
         },
 
-        create1DChart(array1, labarray) {
-            console.log('Begin 1D' + array1)
+        create1DChart(array, labarray) {
+            
             this.chart = new Chart(this.canvas, {
                 
                 // Creates a line chart
@@ -90,12 +92,12 @@ export default {
                     labels: labarray,
                     datasets: [{
                         label: 'Predicted Price',
-                        data: array1,
+                        data: array,
                         backgroundColor: '#FFCAD4',
                         borderColor: '#F4ACB7',
                         borderWidth: 2,
-                        //showLine: true,
-                        //lineTension: 0,
+                        showLine: true,
+                        lineTension: 0,
                     }]
                 },
                 options: {
@@ -113,7 +115,6 @@ export default {
                     
                 }
             });
-            console.log('End 1D' + array1)
         },
     
         prepdata(){
@@ -130,14 +131,20 @@ export default {
                                 x: xvalue,
                                 y: yvalue,
                             };
+
+                            // Array containing the x,y for all predictions done, 
+                            //where x is the value for the chosen filter
                             array.push(datapoint); 
                         }
                     }
                 }; 
 
+                // Resorted the array so that the x-values comes in ascending order
+                // This to insure the best possable result for the graph generated 
                 array.sort((a,b) => {
                     return a.x - b.x;
                 });
+
                 this.create2DChart(array)
             }
             else{
@@ -148,7 +155,7 @@ export default {
         
         create2DChart(array) {
             this.chart = new Chart(this.canvas, {
-                // The type of chart we want to create
+                // Creates a scatter chart
                 type: "scatter",
 
                 // The data for our dataset

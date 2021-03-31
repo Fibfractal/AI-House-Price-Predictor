@@ -3,11 +3,16 @@
       <div class="row">
           <div class="col-4">
                 <h4>Filter</h4>
+                <p>To the right all previous predictions can be seen in a graph.</p>
+                <p>If you choose a filter below the graph will project the predicted prices compared with the parameter of your choice. </p>
+                <br>
+                <p>All area measurement is in Square Feet.</p>
+
                 <select @change="prepdata" class="form-select" aria-label="Default select example" v-model="value">
                     <option disabled value="">Choose filter parameter</option>
+                    <option value="None">No filter</option>
                     <option value="TotRmsAbvGrd">Total rooms above ground</option>
                     <option value="YearBuilt">Year built</option>
-                    <option value="LandContour">Land contour</option>
                     <option value="BsmtFinSF1">Finished basement area</option>
                     <option value="GarageCars">Garage space</option>
                     <option value="_1stFlrSF">First floor area</option>
@@ -18,7 +23,7 @@
                 </select>
           </div>
           <div class="col-8">
-              <h3>Graph</h3>
+              <h4>Display of Previously Predicted Prices</h4>
               <canvas id="myChart"></canvas>
           </div>
       </div>
@@ -80,16 +85,27 @@ export default {
                 type: 'line',
                 data: {
                     datasets: [{
-                        label: 'Line Chart',
+                        label: 'Predicted Price',
                         data: array1,
-                        backgroundColor: 'red',
-                        borderColor: 'red',
-                        borderWidth: 1,
+                        backgroundColor: '#FFCAD4',
+                        borderColor: '#F4ACB7',
+                        borderWidth: 2,
                         showLine: true,
                         lineTension: 0,
                     }]
                 },
                 options: {
+                    scales: {
+                        display: true,
+                        yAxes: [{
+                            ticks: {
+                                // Include a dollar sign in the ticks
+                                callback: function(value, index, values) {
+                                    return '$' +  value;
+                                }
+                            }
+                        }]
+                    }
                     
                 }
             });
@@ -98,21 +114,26 @@ export default {
         prepdata(){
             let choice = this.value;
             let array = []
-            for (let i = 0; i < this.predictions.length; i++){
-                for (let key in this.predictions[i]) {
-                    if (key == choice) {
+            if (choice != 'None'){
+                for (let i = 0; i < this.predictions.length; i++){
+                    for (let key in this.predictions[i]) {
+                        if (key == choice) {
 
-                        let xvalue = this.predictions[i][key]
-                        let yvalue = this.predictions[i].PredictedPrice
-                        let datapoint = {
-                            x: xvalue,
-                            y: yvalue,
-                        };
-                        array.push(datapoint); 
+                            let xvalue = this.predictions[i][key]
+                            let yvalue = this.predictions[i].PredictedPrice
+                            let datapoint = {
+                                x: xvalue,
+                                y: yvalue,
+                            };
+                            array.push(datapoint); 
+                        }
                     }
-                }
-            }; 
-            this.create2DChart(array)
+                }; 
+                this.create2DChart(array)
+            }
+            else{
+                this.createPriceArray()
+            } 
         },
 
         
@@ -124,19 +145,27 @@ export default {
                 // The data for our dataset
                 data: {
                     datasets: [{
-                        label: 'Scatter Dataset',
+                        label: 'Predicted Price',
                         data: array,
-                        showLine:true,
-                        lineTension:0,
+                        backgroundColor: '#B7E4C7',
+                        borderColor: '#95D5B2',
+                        borderWidth: 2,
+                        showLine: true,
+                        lineTension: 0,
                     }]
                 },
                 options: {
                     scales: {
-                        xAxes: [{
-                            type: 'linear',
-                            position: 'bottom'
+                        display: true,
+                        yAxes: [{
+                            ticks: {
+                                // Include a dollar sign in the ticks
+                                callback: function(value, index, values) {
+                                    return '$' +  value;
+                                }
+                            }
                         }]
-                    },
+                    }
                 }
             })
 

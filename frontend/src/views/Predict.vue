@@ -208,17 +208,23 @@ export default {
 
                 GrLivArea: this.grLivArea,
                 OverallQual:this.overallQual
-            }       
+            }      
             
             console.log(dataToPredict)
-            
+            let prediction = 0
 
-            let res = await fetch('/api/predict', {
-                method: 'POST',
-                body: JSON.stringify(dataToPredict)
-            })
+            try{
+                let res = await fetch('/api/predict', {
+                    method: 'POST',
+                    body: JSON.stringify(dataToPredict)
+                })
+                prediction = await res.json()
+            }
+            catch(err) {
+                this.price = "Something went wrong try again!"
+            }
 
-            let prediction = await res.json()
+
             console.log("Prediction:", prediction)
 
             if(prediction > 0){

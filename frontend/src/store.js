@@ -1,10 +1,14 @@
 import { createStore } from 'vuex'
 
 const state = {
+    prediction: 0,
     predictions: [],
 }
 
 const mutations = {
+    setPrediction(state, prediction){
+        state.prediction = prediction
+    },
     setPredictions(state, predictionsList){
         state.predictions = predictionsList
     },

@@ -116,10 +116,10 @@
                         </div>
                         <div class="row">
 
-                            <div class="col-12 col-md-4 mt-4">
+                            <div class="col-12 col-md-4 mt-5 p-4">
                                 <div class="card" style="width: 100%; background-color: white;">
                                 <div class="card-body">
-                                    <h4 class="card-title">Prediction:</h4>
+                                    <h4 class="card-title">The predicted house price:</h4>
                                     <h6 class="card-subtitle mb-2 text-muted">Accuray of 88 %</h6>
                                     <h3 class="card-text mt-5">{{ this.price }}</h3>
                                 </div>
@@ -127,179 +127,232 @@
                             </div>
 
                             <div class="col-12 col-md-8 mt-4">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore corporis itaque perferendis eos doloribus molestiae perspiciatis obcaecati, dolorem, ullam, expedita saepe fugit tempora officiis fugiat. Provident tempore vel suscipit ipsam nemo quasi fuga. Esse nam, hic alias aliquam quas culpa iusto at amet veritatis animi sapiente distinctio pariatur dolore maxime quasi tenetur facere molestias dolor rerum tempore reprehenderit? Saepe corrupti consequatur atque laudantium accusantium molestiae enim mollitia voluptate maiores, rem animi porro doloribus blanditiis, dolor praesentium, quos reprehenderit. Et obcaecati cum esse expedita nam, autem numquam natus totam ipsa voluptas corrupti beatae, necessitatibus vero nostrum earum veniam illo consequatur excepturi!</p>
+                                <div class="row">
+
+                                    <!-- canvas -->
+                                    <div class="col-12 col-md-8 mt-5">
+                                        <canvas id="myChart" height="200"></canvas>
+                                    </div>
+
+                                    <div class="col-12 col-md-4 mt-5"></div>
+                                </div>
                             </div>
-
                         </div>
-
-
-
-
                     </div>
-                    
-
 
         </div>
     </main>
 </template>
 
 <script>
-export default {
-  data(){
-        return {
-            
-            totRmsAbvGrd: '',
-            yearBuilt: '',
-            landContour: '',
-            bsmtFinSF1: '',
-            garageCars: '',
-            _1stFlrSF: '',
-            totalBsmtSF: '',
-            _2ndFlrSF: '',
-            grLivArea: '',
-            overallQual: '',
-            price: '',
-        }
-    },
-    methods: {
 
-        async predict(){
+    import Chart from "chart.js";
 
+    export default {
 
-            console.log("I am in input control")
+        data(){
+            return {
+                
+                totRmsAbvGrd: '',
+                yearBuilt: '',
+                landContour: '',
+                bsmtFinSF1: '',
+                garageCars: '',
+                _1stFlrSF: '',
+                totalBsmtSF: '',
+                _2ndFlrSF: '',
+                grLivArea: '',
+                overallQual: '',
+                price: '',
 
-            console.log(this.totRmsAbvGrd)
-            console.log(this.yearBuilt)
-            console.log(this.landContour)
-            console.log(this.bsmtFinSF1)
-
-            console.log(this.garageCars)
-            console.log(this._1stFlrSF)
-            console.log(this.totalBsmtSF)
-            console.log(this._2ndFlrSF)
-
-            console.log(this.grLivArea)
-            console.log(this.overallQual)
-
-            // Onehot encoded variable
-
-            let toModel = [0,0,0,0]
-            let _landContour = ["Low","HLS", "Bnk", "Lvl" ]
-
-            for (var i = 0; i < _landContour.length; i++) {
-                if(this.landContour === _landContour[i] ){
-                    toModel[i] = 1
-                }
+                canvas: "",
+                chart: "",
             }
+        },
 
-            console.log(toModel)
+        mounted(){
 
-            // To trained model
+            let canvas = document.getElementById("myChart")
+            let ctx = canvas.getContext("2d")
+            this.canvas = ctx
+            this.createChart()
+        },
 
-            let dataToPredict = {
+        methods: {
 
-                TotRmsAbvGrd: this.totRmsAbvGrd,
-                YearBuilt: this.yearBuilt,
-                LandContour: toModel,
-                BsmtFinSF1: this.bsmtFinSF1,
+            createChart(){
 
-                GarageCars: this.garageCars,
-                _1stFlrSF: this._1stFlrSF,
-                TotalBsmtSF: this.totalBsmtSF,
-                _2ndFlrSF: this._2ndFlrSF,
+                this.chart = new Chart(this.canvas, {
 
-                GrLivArea: this.grLivArea,
-                OverallQual:this.overallQual
-            }      
-            
-            console.log(dataToPredict)
-            let prediction = 0
+                    type:'bar',
+                    data: {
 
-            try{
-                let res = await fetch('/api/predict', {
-                    method: 'POST',
-                    body: JSON.stringify(dataToPredict)
+                        labels: [''],
+                        datasets: [
+                            {
+                                label: 'Predicted price',
+                                data: [0],
+                                backgroundColor: ['blue'],
+                                borderColor: ['black'],
+                                borderWidth: 2
+                            }  
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function(value, index, values) {
+                                        return '$' +  value;
+                                    }
+                                }
+                            }]
+                        }
+                    }
                 })
-                prediction = await res.json()
-            }
-            catch(err) {
-                this.price = "Something went wrong try again!"
-            }
+            },
+            async predict(){
 
 
-            console.log("Prediction:", prediction)
+                console.log("I am in input control")
 
-            if(prediction > 0){
+                console.log(this.totRmsAbvGrd)
+                console.log(this.yearBuilt)
+                console.log(this.landContour)
+                console.log(this.bsmtFinSF1)
 
-                // Set global variable and store prediction
-    
-                let priceFormat =  new Intl.NumberFormat('en-US',
-                    { style: 'currency', currency: 'USD',
-                        minimumFractionDigits: 0 });
-    
-                this.price = priceFormat.format(parseInt(prediction))
-    
-                this.$store.commit('setPrediction', prediction)
-                console.log("Prediction in store", this.$store.state.prediction)
-    
-                // To database
-    
-                let dataToDatabase = {
+                console.log(this.garageCars)
+                console.log(this._1stFlrSF)
+                console.log(this.totalBsmtSF)
+                console.log(this._2ndFlrSF)
+
+                console.log(this.grLivArea)
+                console.log(this.overallQual)
+
+                // Onehot encoded variable
+
+                let toModel = [0,0,0,0]
+                let _landContour = ["Low","HLS", "Bnk", "Lvl" ]
+
+                for (var i = 0; i < _landContour.length; i++) {
+                    if(this.landContour === _landContour[i] ){
+                        toModel[i] = 1
+                    }
+                }
+
+                console.log(toModel)
+
+                // To trained model
+
+                let dataToPredict = {
+
                     TotRmsAbvGrd: this.totRmsAbvGrd,
                     YearBuilt: this.yearBuilt,
-                    LandContour: this.landContour,
+                    LandContour: toModel,
                     BsmtFinSF1: this.bsmtFinSF1,
+
                     GarageCars: this.garageCars,
                     _1stFlrSF: this._1stFlrSF,
                     TotalBsmtSF: this.totalBsmtSF,
                     _2ndFlrSF: this._2ndFlrSF,
-                    GrLivArea: this.grLivArea,
-                    OverallQual: this.overallQual,
-                    PredictedPrice: prediction
-                }
 
-                try {
-                    
-                    let result = await fetch('/rest/predictions', {
+                    GrLivArea: this.grLivArea,
+                    OverallQual:this.overallQual
+                }      
+                
+                console.log(dataToPredict)
+                let prediction = 0
+
+                try{
+                    let res = await fetch('/api/predict', {
                         method: 'POST',
-                        body: JSON.stringify(dataToDatabase)
+                        body: JSON.stringify(dataToPredict)
                     })
-        
-                    let dataFromDatabase = await result.json()
-                    console.log("from database", dataFromDatabase)
-        
-                    // Add the new predict to store predictions
-        
-                    console.log("Before:",this.$store.state.predictions)
-                    this.$store.commit('appendPrediction', dataFromDatabase)
-                    console.log("After:", this.$store.state.predictions)
+                    prediction = await res.json()
                 }
                 catch(err) {
-                    this.price = "Error, the prediction data wasn't added to the data base!"
+                    this.price = "Something went wrong try again!"
                 }
-            }
-            else{
-                this.price = "Something went wrong try again!"
-            }
 
-        }, 
-        emptyVariables(){
+
+                console.log("Prediction:", prediction)
+
+                if(prediction > 0){
+                    
+                    // Set global variable and store prediction
+        
+                    let priceFormat =  new Intl.NumberFormat('en-US',
+                        { style: 'currency', currency: 'USD',
+                            minimumFractionDigits: 0 });
+        
+                    this.price = priceFormat.format(parseInt(prediction))
+        
+                    this.$store.commit('setPrediction', prediction)
+                    console.log("Prediction in store", this.$store.state.prediction)
+
+                    let chartDataset = this.chart.data.datasets[0]
+                    chartDataset.data[0] = prediction
+                    this.chart.update()
+        
+                    // To database
+        
+                    let dataToDatabase = {
+                        TotRmsAbvGrd: this.totRmsAbvGrd,
+                        YearBuilt: this.yearBuilt,
+                        LandContour: this.landContour,
+                        BsmtFinSF1: this.bsmtFinSF1,
+                        GarageCars: this.garageCars,
+                        _1stFlrSF: this._1stFlrSF,
+                        TotalBsmtSF: this.totalBsmtSF,
+                        _2ndFlrSF: this._2ndFlrSF,
+                        GrLivArea: this.grLivArea,
+                        OverallQual: this.overallQual,
+                        PredictedPrice: prediction
+                    }
+
+                    try {
+                        
+                        let result = await fetch('/rest/predictions', {
+                            method: 'POST',
+                            body: JSON.stringify(dataToDatabase)
+                        })
             
-            this.totRmsAbvGrd = ''
-            this.yearBuilt = ''
-            this.landContour = ''
-            this.bsmtFinSF1 = ''
+                        let dataFromDatabase = await result.json()
+                        console.log("from database", dataFromDatabase)
+            
+                        // Add the new predict to store predictions
+            
+                        console.log("Before:",this.$store.state.predictions)
+                        this.$store.commit('appendPrediction', dataFromDatabase)
+                        console.log("After:", this.$store.state.predictions)
+                    }
+                    catch(err) {
+                        this.price = "Error, the prediction data wasn't added to the data base!"
+                    }
+                }
+                else{
+                    this.price = "Something went wrong try again!"
+                }
 
-            this.garageCars = ''
-            this._1stFlrSF = ''
-            this.totalBsmtSF = ''
-            this._2ndFlrSF = ''
+            }, 
+            emptyVariables(){
+                
+                this.totRmsAbvGrd = ''
+                this.yearBuilt = ''
+                this.landContour = ''
+                this.bsmtFinSF1 = ''
 
-            this.grLivArea = ''
-            this.overallQual = ''
+                this.garageCars = ''
+                this._1stFlrSF = ''
+                this.totalBsmtSF = ''
+                this._2ndFlrSF = ''
+
+                this.grLivArea = ''
+                this.overallQual = ''
+            }
         }
     }
-}
 </script>
 
 <style scope>
@@ -320,6 +373,11 @@ export default {
         float: left;
         margin-top: 30px;
         margin-bottom: 20px;
+    }
+
+    #myChart {
+        /* width: 50%; */
+        /* height:100px; */
     }
 
 </style>

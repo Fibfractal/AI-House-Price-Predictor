@@ -50,6 +50,16 @@ export default {
         }
     },
 
+    watch:{
+        predictions: {
+            immediate: true,
+            handler(){
+                this.createPriceArray();
+            }   
+        }
+
+    },
+
     created(){
         this.$store.dispatch('initPredictions');
     },
@@ -58,7 +68,7 @@ export default {
         let canvas = document.getElementById("myChart");
         let ctx = canvas.getContext("2d");
         this.canvas = ctx;
-        this.createPriceArray();
+        //this.createPriceArray();
         
     },
 

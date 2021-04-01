@@ -119,7 +119,7 @@
                             <div class="col-12 col-md-4 mt-5 p-4">
                                 <div class="card" style="width: 100%; background-color: white;">
                                 <div class="card-body">
-                                    <h4 class="card-title">Prediction:</h4>
+                                    <h4 class="card-title">The predicted house price:</h4>
                                     <h6 class="card-subtitle mb-2 text-muted">Accuray of 88 %</h6>
                                     <h3 class="card-text mt-5">{{ this.price }}</h3>
                                 </div>
@@ -191,7 +191,7 @@
                         datasets: [
                             {
                                 label: 'Predicted price',
-                                data: [1000],
+                                data: [0],
                                 backgroundColor: ['blue'],
                                 borderColor: ['black'],
                                 borderWidth: 2
@@ -203,6 +203,9 @@
                             yAxes: [{
                                 ticks: {
                                     beginAtZero: true,
+                                    callback: function(value, index, values) {
+                                        return '$' +  value;
+                                    }
                                 }
                             }]
                         }

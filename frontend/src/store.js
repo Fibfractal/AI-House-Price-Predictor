@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 const state = {
     prediction: 0,
     predictions: [],
+    previousEntry: null
 }
 
 const mutations = {
@@ -14,6 +15,9 @@ const mutations = {
     },
     appendPrediction(state, predictionToAppend){
         state.predictions.push(predictionToAppend) 
+    },
+    setPreviousEntry(state, previousEntry){
+        state.previousEntry = previousEntry
     }
 }
 

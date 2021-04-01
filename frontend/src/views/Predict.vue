@@ -13,7 +13,7 @@
                     <ol>
                         <li>
                             <div class="form-group m-3">
-                                <input v-model="grLivArea" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the living area above gound in square feet" name="uname" required>
+                                <input v-model="grLivArea" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the living area above ground in square feet" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
@@ -63,7 +63,8 @@
                         </li>
                         <li>
                             <div class="form-group m-3">
-                                <input v-model="yearBuilt" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the year built" name="uname" required>
+                                <input v-model="yearBuilt" type="number" min = "1000" :max="new Date().getFullYear()" class="form-control" id="uname" placeholder="Enter the year built (format: XXXX)" name="uname" required>
+
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
@@ -213,7 +214,6 @@
                 })
             },
             async predict(){
-
 
                 console.log("I am in input control")
 

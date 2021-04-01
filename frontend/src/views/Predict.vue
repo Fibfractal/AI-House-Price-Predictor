@@ -1,74 +1,81 @@
 <template>
     <main class="container-fluid">
+        
         <div class="row">
             <div class="col-12 col-md-4 p-4 data-input-col">
                 
                 <h3>Make a prediction</h3>
-
                 <p class="directives">Fill out ALL the fields in the form below to predict a price of a house </p>
-
 
                 <form @submit.prevent="predict" class="was-validated">
 
                     <ol>
                         <li>
+                            <p class = "input-info">Enter the living area above ground in square feet</p>
                             <div class="form-group m-3">
-                                <input v-model="grLivArea" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the living area above ground in square feet" name="uname" required>
+                                <input v-model="grLivArea" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
                         </li>
                         <li>
+                            <p class = "input-info">Enter the area of the first floor in square feet</p>
                             <div class="form-group m-3">
-                                <input v-model="_1stFlrSF" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the area of the first floor in square feet" name="uname" required>
+                                <input v-model="_1stFlrSF" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
                         </li>
                         <li>
+                            <p class = "input-info">Enter the area of the second floor in square feet (enter 0 if you don't have)</p>
                             <div class="form-group m-3">
-                                <input v-model="_2ndFlrSF" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the area of the second floor in square feet (enter 0 if you don't have)" name="uname" required>
+                                <input v-model="_2ndFlrSF" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
                         </li>
                         <li>
+                            <p class = "input-info">Enter the total area of basement in square feet (enter 0 if you don't have)</p>
                             <div class="form-group m-3">
-                                <input v-model="totalBsmtSF" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the total area of basement in square feet (enter 0 if you don't have)" name="uname" required>
+                                <input v-model="totalBsmtSF" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
                         </li>
                         <li>
+                            <p class = "input-info">Enter the finished area of the basement in square feet (enter 0 if you don't have)</p>
                             <div class="form-group m-3">
-                                <input v-model="bsmtFinSF1" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the finished area of the basement in square feet (enter 0 if you don't have)" name="uname" required>
+                                <input v-model="bsmtFinSF1" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div> 
                         </li>
+                        <li>
+                            <p class = "input-info">Enter the total number of rooms above ground, does not include bathrooms</p>
+                            <div class="form-group m-3">
+                                <input v-model="totRmsAbvGrd" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Enter an integer.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <p class = "input-info">Enter the capacity of the garage in number of cars (enter 0 if you don't have)</p>
+                            <div class="form-group m-3">
+                                <input v-model="garageCars" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Enter an integer.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <p class = "input-info">Enter the year built (format: XXXX)</p>
+                            <div class="form-group m-3">
+                                <input v-model="yearBuilt" type="number" min = "1000" :max="new Date().getFullYear()" class="form-control" id="uname" placeholder="" name="uname" required>
 
-                        <li>
-                            <div class="form-group m-3">
-                                <input v-model="totRmsAbvGrd" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the total number of rooms above ground, does not include bathrooms" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
                         </li>
-                        <li>
-                            <div class="form-group m-3">
-                                <input v-model="garageCars" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the capacity of the garage in number of cars (enter 0 if you don't have)" name="uname" required>
-                                <div class="valid-feedback">Field is filled.</div>
-                                <div class="invalid-feedback">Enter an integer.</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-group m-3">
-                                <input v-model="yearBuilt" type="number" min = "1000" :max="new Date().getFullYear()" class="form-control" id="uname" placeholder="Enter the year built (format: XXXX)" name="uname" required>
-
-                                <div class="valid-feedback">Field is filled.</div>
-                                <div class="invalid-feedback">Enter an integer.</div>
-                            </div>
-                        </li>
+                        <br>
                         <li>
                             <div class="form-group m-3">
                                 <select class="drop-down-own" v-model="overallQual" aria-label="Default select example" required>
@@ -88,6 +95,7 @@
                                 <div class="invalid-feedback">Please fill out this field.</div>               
                             </div>
                         </li>
+                         <br>
                         <li>
                             <div class="form-group m-3">
                                 <select class="drop-down-own" v-model="landContour" aria-label="Default select example" required>
@@ -102,10 +110,9 @@
                             </div>
                         </li>
                     </ol>
- 
                     <button type="submit" class="btn btn-secondary m-4">Submit</button>
                     <button type="reset" class="btn btn-secondary m-4" @click="emptyVariables">Reset</button>
-
+                    
                 </form>                                
             </div>
                     <div class="col-12 col-md-8 p-4 display-prediction-col">
@@ -356,6 +363,21 @@
 </script>
 
 <style scope>
+  
+    /* Remove spinners */
+    
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
     .data-input-col {
         background-color: rgb(199, 206, 204);
     }
@@ -371,13 +393,17 @@
 
     .directives {
         float: left;
+        text-align: left;
         margin-top: 30px;
         margin-bottom: 20px;
+        margin-left: 30px;
     }
 
-    #myChart {
-        /* width: 50%; */
-        /* height:100px; */
+    .input-info {
+        float: left;
+        margin-top: 20px;
+        text-align: left;
     }
+
 
 </style>

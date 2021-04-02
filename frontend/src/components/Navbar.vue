@@ -26,12 +26,14 @@ export default {
         margin: 10px;
         text-decoration:none;
         color: white;
-        font-size: 22px;
+        font-size: 25px;
+        margin-right: 25px;
     }
 
     a:hover {
-        color: rgb(190, 100, 100);
+        color: pink;
         cursor: pointer;
-        transition: 0.25s;
+        transition: 0.3s;
     }
+
 </style>

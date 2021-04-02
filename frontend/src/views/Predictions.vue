@@ -222,9 +222,8 @@ export default {
 <style scoped>
 
     .data-input-col {
-        background-color: rgb(199, 206, 204);
+        background-color: #dfe4ea;
     }
-
     
     .input-info {
         float: left;

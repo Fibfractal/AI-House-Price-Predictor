@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12 col-md-4 p-4 data-input-col">
                 
-                <h3>Make a prediction</h3>
+                <h4>Make a prediction</h4>
                 <p class="directives">Fill out ALL the fields in the form below to predict a price of a house </p>
 
                 <form @submit.prevent="predict" class="was-validated">
@@ -125,7 +125,7 @@
                         <div class="row">
 
                             <div class="col-12 col-md-4 mt-5 p-4">
-                                <div class="card" style="width: 100%; background-color: white;">
+                                <div class="card shadow-sm" style="width: 100%; background-color: white;">
                                 <div class="card-body">
                                     <h4 class="card-title">The predicted house price:</h4>
                                     <h6 class="card-subtitle mb-2 text-muted">Accuray of 88 %</h6>
@@ -133,7 +133,6 @@
                                 </div>
                                 </div>
                             </div>
-
                             <div class="col-12 col-md-8 mt-4">
                                 <div class="row">
 
@@ -379,7 +378,7 @@
     }
 
     .data-input-col {
-        background-color: rgb(199, 206, 204);
+        background-color: #dfe4ea;
     }
     .display-prediction-col {
         background-color: white;
@@ -404,6 +403,5 @@
         margin-top: 20px;
         text-align: left;
     }
-
 
 </style>

@@ -144,6 +144,21 @@
                                     <div class="col-12 col-md-4 mt-5"></div>
                                 </div>
                             </div>
+
+                        <div class="row">
+                            <div class="col-12 mt-5">
+                                <h4>Where are home prices rising the most?</h4>
+                                <p class = "input-info">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit sit perspiciatis doloribus minima quis natus explicabo consequuntur nulla maxime, nisi eum incidunt illum quos non saepe, voluptatem nobis fugiat qui, rem asperiores autem. Quisquam similique excepturi quibusdam dolor, praesentium modi, obcaecati unde corrupti, odit quaerat reiciendis esse aperiam veniam magni nam in! Sit neque odio laboriosam ipsa commodi officiis deserunt iure recusandae similique fuga saepe, accusantium vitae repellendus pariatur minima deleniti voluptate, enim, totam et eum error dicta magnam dolores? Veniam debitis asperiores quasi perferendis ad assumenda nemo molestiae, corporis, adipisci consequatur nihil possimus cupiditate aliquam quas deserunt nulla minima.</p>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 mt-5">
+                                <img src="src\assets\usaHousemarket.png" class="img-fluid" alt="Responsive image">
+                            </div>
+                        </div>
+
                         </div>
                     </div>
 

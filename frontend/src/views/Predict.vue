@@ -112,7 +112,7 @@
                     </ol>
                     <button type="submit" class="btn btn-secondary m-4">Submit</button>
                     <button type="reset" class="btn btn-secondary m-4" @click="emptyVariables">Reset</button>
-                    
+
                 </form>                                
             </div>
                     <div class="col-12 col-md-8 p-4 display-prediction-col">
@@ -200,8 +200,8 @@
                             {
                                 label: 'Predicted price',
                                 data: [0],
-                                backgroundColor: ['blue'],
-                                borderColor: ['black'],
+                                backgroundColor: ['#FFCAD4'],
+                                borderColor: ['#F4ACB7'],
                                 borderWidth: 2
                             }  
                         ],

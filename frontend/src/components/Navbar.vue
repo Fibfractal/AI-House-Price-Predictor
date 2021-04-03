@@ -1,6 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-secondary bg-secondary justify-content-center p-4">
-        <ul class="navbar-nav">
+  <nav class="navbar navbar-expand-lg navbar-secondary bg-secondary p-4">
+        <img id = "logo" src="src\assets\logo.png" width=60 height=60 class="img-fluid" alt="Responsive image">
+        <ul id=ul-items>
             <li class="nav-item">
                 <router-link to='/'>Make a prediction</router-link>
             </li>
@@ -34,6 +35,20 @@ export default {
         color: pink;
         cursor: pointer;
         transition: 0.3s;
+    }
+
+    #logo {
+        float: left;
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+
+    #ul-items {
+        margin:auto;
+    }
+
+    #ul-items li {
+        display: inline-block;
     }
 
 </style>

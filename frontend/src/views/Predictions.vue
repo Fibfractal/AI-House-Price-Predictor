@@ -146,7 +146,8 @@ export default {
     
         prepdata(){
             let choice = this.value;
-            let array = []
+            let array = [];
+            let haveLines = true;
             if (choice != 'None'){
                 for (let i = 0; i < this.predictions.length; i++){
                     for (let key in this.predictions[i]) {
@@ -166,13 +167,18 @@ export default {
                     }
                 }; 
 
+                // Some options look better without lines in the graph
+                if (choice == "TotRmsAbvGrd" || choice == "GarageCars" || choice == "_2ndFlrSF" ){
+                    haveLines = false;
+                }
+
                 // Resorted the array so that the x-values comes in ascending order
                 // This to insure the best possable result for the graph generated 
                 array.sort((a,b) => {
                     return a.x - b.x;
                 });
 
-                this.create2DChart(array)
+                this.create2DChart(array,haveLines)
             }
             else{
                 this.createPriceArray()
@@ -180,7 +186,7 @@ export default {
         },
 
         
-        create2DChart(array) {
+        create2DChart(array,haveLines) {
             this.chart = new Chart(this.canvas, {
                 // Creates a scatter chart
                 type: "scatter",
@@ -193,7 +199,7 @@ export default {
                         backgroundColor: '#B7E4C7',
                         borderColor: '#95D5B2',
                         borderWidth: 2,
-                        showLine: true,
+                        showLine: haveLines,
                         lineTension: 0,
                     }]
                 },

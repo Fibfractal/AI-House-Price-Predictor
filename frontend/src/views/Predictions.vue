@@ -1,12 +1,16 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
       <div class="row">
-          <div class="col-4">
+          <div class="col-12 col-md-4 p-4 data-input-col">
+                
                 <h4>Filter</h4>
-                <p>To the right all previous predictions can be seen in a graph.</p>
-                <p>If you choose a filter below the graph will project the predicted prices compared with the parameter of your choice. </p>
-                <br>
-                <p>All area measurement is in Square Feet.</p>
+
+                <div class="input-info">
+                    <p>To the right all previous predictions can be seen in a graph.</p>
+                    <p>If you choose a filter below, the graph will project the predicted prices compared with the parameter of your choice. </p>
+                    <br>
+                    <p>All area measurement is in Square Feet.</p>
+                </div>
 
                 <select @change="prepdata" class="form-select" aria-label="Default select example" v-model="value">
                     <option disabled value="">Choose filter parameter</option>
@@ -22,10 +26,23 @@
                     <option value="OverallQual">Overall Quality</option>
                 </select>
           </div>
-          <div class="col-8">
-              <h4>Display of Previously Predicted Prices</h4>
-              <canvas id="myChart"></canvas>
+
+          <div class="col-12 col-md-8 p-4">
+
+            <div class="row">
+
+                    <div class="col-12 col-md-2"></div>
+                    <div class="col-12 col-md-6 p-4">
+                        <h4 class = "mb-5">Display of Previously Predicted Prices</h4>
+
+                        <!-- Canvas -->
+                        <canvas id="myChart" height="200"></canvas>
+                    </div>
+                    <div class="col-12 col-md-1"></div>
+            </div>
+
           </div>
+
       </div>
   </div>
 </template>
@@ -203,5 +220,15 @@ export default {
 </script>
 
 <style scoped>
+
+    .data-input-col {
+        background-color: #dfe4ea;
+    }
+    
+    .input-info {
+        float: left;
+        margin-top: 20px;
+        text-align: left;
+    }
 
 </style>

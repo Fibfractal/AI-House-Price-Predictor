@@ -47,7 +47,11 @@
                 <div class="col-12 col-md-1"></div>
                 <div class="col-12 col-md-10 ">
                   <h4>About the service</h4>
-                  <p class = "input-info">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, unde, ratione quos eaque eos voluptatibus voluptate doloremque iure quasi neque aperiam, minima hic! Vel nisi eius pariatur eum vitae. Deleniti fuga illum numquam quisquam officiis, sapiente ipsum quasi fugiat obcaecati exercitationem delectus, alias excepturi tempore eveniet, saepe eum tempora impedit. Reprehenderit doloremque repellat laborum ullam incidunt, deleniti corrupti vel laboriosam, culpa accusantium distinctio adipisci nisi officiis animi earum vitae voluptates similique impedit? Non corporis eveniet at nemo minus recusandae perspiciatis repellendus est deleniti quod, numquam illum aliquid nobis saepe. Magnam repellendus deserunt nobis earum delectus saepe excepturi voluptas harum ea.
+                  <p class = "input-info">We use a AI model to make predictions of house prices based on a number of input values, as a part of a school project. On our test data the model has an accuracy of 88 %.
+                  </p>
+                  <p class = "input-info">The model is trained on data from a specific geographic area, and may not project a fair picture of the value of homes in your area.</p>
+                  <h4>Disclaimer - At your own risk</h4>
+                  <p class = "input-info">We do not make any warrenties about the completeness, reliability or accuracy of this information. <strong> Any action you take upon the information on this website is strictly at your own risk</strong>, and web will not be liable for any losses and damages in connection with the use of our website.
                   </p>
                 </div>
                 <div class="col-12 col-md-1"></div>

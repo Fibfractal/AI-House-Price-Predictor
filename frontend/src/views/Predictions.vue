@@ -1,12 +1,16 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
       <div class="row">
-          <div class="col-4">
+          <div class="col-12 col-md-4 p-4 data-input-col">
+                
                 <h4>Filter</h4>
-                <p>To the right all previous predictions can be seen in a graph.</p>
-                <p>If you choose a filter below the graph will project the predicted prices compared with the parameter of your choice. </p>
-                <br>
-                <p>All area measurement is in Square Feet.</p>
+
+                <div class="input-info">
+                    <p>To the right all previous predictions can be seen in a graph.</p>
+                    <p>If you choose a filter below, the graph will project the predicted prices compared with the parameter of your choice. </p>
+                    <br>
+                    <p>All area measurement is in Square Feet.</p>
+                </div>
 
                 <select @change="prepdata" class="form-select" aria-label="Default select example" v-model="value">
                     <option disabled value="">Choose filter parameter</option>
@@ -19,13 +23,26 @@
                     <option value="TotalBsmtSF">Total basement area</option>
                     <option value="_2ndFlrSF">Second floor area</option>
                     <option value="GrLivArea">Ground living area</option>
-                    <option value="OverallQual">Overall Quality</option>
+                    <option value="OverallQual">Overall quality</option>
                 </select>
           </div>
-          <div class="col-8">
-              <h4>Display of Previously Predicted Prices</h4>
-              <canvas id="myChart"></canvas>
+
+          <div class="col-12 col-md-8 p-4">
+
+            <div class="row">
+
+                    <div class="col-12 col-md-2"></div>
+                    <div class="col-12 col-md-6 p-4">
+                        <h4 class = "mb-5">Display of previously predicted prices</h4>
+
+                        <!-- Canvas -->
+                        <canvas id="myChart" height="200"></canvas>
+                    </div>
+                    <div class="col-12 col-md-1"></div>
+            </div>
+
           </div>
+
       </div>
   </div>
 </template>
@@ -101,7 +118,7 @@ export default {
                 data: {
                     labels: labarray,
                     datasets: [{
-                        label: 'Predicted Price',
+                        label: 'Predicted price',
                         data: array,
                         backgroundColor: '#FFCAD4',
                         borderColor: '#F4ACB7',
@@ -129,7 +146,8 @@ export default {
     
         prepdata(){
             let choice = this.value;
-            let array = []
+            let array = [];
+            let haveLines = true;
             if (choice != 'None'){
                 for (let i = 0; i < this.predictions.length; i++){
                     for (let key in this.predictions[i]) {
@@ -149,13 +167,18 @@ export default {
                     }
                 }; 
 
+                // Some options look better without lines in the graph
+                if (choice == "TotRmsAbvGrd" || choice == "GarageCars" || choice == "_2ndFlrSF" ){
+                    haveLines = false;
+                }
+
                 // Resorted the array so that the x-values comes in ascending order
                 // This to insure the best possable result for the graph generated 
                 array.sort((a,b) => {
                     return a.x - b.x;
                 });
 
-                this.create2DChart(array)
+                this.create2DChart(array,haveLines)
             }
             else{
                 this.createPriceArray()
@@ -163,7 +186,7 @@ export default {
         },
 
         
-        create2DChart(array) {
+        create2DChart(array,haveLines) {
             this.chart = new Chart(this.canvas, {
                 // Creates a scatter chart
                 type: "scatter",
@@ -171,12 +194,12 @@ export default {
                 // The data for our dataset
                 data: {
                     datasets: [{
-                        label: 'Predicted Price',
+                        label: 'Predicted price',
                         data: array,
                         backgroundColor: '#B7E4C7',
                         borderColor: '#95D5B2',
                         borderWidth: 2,
-                        showLine: true,
+                        showLine: haveLines,
                         lineTension: 0,
                     }]
                 },
@@ -203,5 +226,15 @@ export default {
 </script>
 
 <style scoped>
+
+    .data-input-col {
+        background-color: #dfe4ea;
+    }
+    
+    .input-info {
+        float: left;
+        margin-top: 20px;
+        text-align: left;
+    }
 
 </style>

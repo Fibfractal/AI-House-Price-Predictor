@@ -1,74 +1,81 @@
 <template>
     <main class="container-fluid">
+        
         <div class="row">
             <div class="col-12 col-md-4 p-4 data-input-col">
                 
-                <h3>Make a prediction</h3>
-
+                <h4>Make a prediction</h4>
                 <p class="directives">Fill out ALL the fields in the form below to predict a price of a house </p>
-
 
                 <form @submit.prevent="predict" class="was-validated">
 
                     <ol>
                         <li>
+                            <p class = "input-info">Enter the living area above ground in square feet</p>
                             <div class="form-group m-3">
-                                <input v-model="grLivArea" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the living area above ground in square feet" name="uname" required>
+                                <input v-model="grLivArea" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
                         </li>
                         <li>
+                            <p class = "input-info">Enter the area of the first floor in square feet</p>
                             <div class="form-group m-3">
-                                <input v-model="_1stFlrSF" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the area of the first floor in square feet" name="uname" required>
+                                <input v-model="_1stFlrSF" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
                         </li>
                         <li>
+                            <p class = "input-info">Enter the area of the second floor in square feet (enter 0 if you don't have)</p>
                             <div class="form-group m-3">
-                                <input v-model="_2ndFlrSF" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the area of the second floor in square feet (enter 0 if you don't have)" name="uname" required>
+                                <input v-model="_2ndFlrSF" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
                         </li>
                         <li>
+                            <p class = "input-info">Enter the total area of basement in square feet (enter 0 if you don't have)</p>
                             <div class="form-group m-3">
-                                <input v-model="totalBsmtSF" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the total area of basement in square feet (enter 0 if you don't have)" name="uname" required>
+                                <input v-model="totalBsmtSF" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
                         </li>
                         <li>
+                            <p class = "input-info">Enter the finished area of the basement in square feet (enter 0 if you don't have)</p>
                             <div class="form-group m-3">
-                                <input v-model="bsmtFinSF1" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the finished area of the basement in square feet (enter 0 if you don't have)" name="uname" required>
+                                <input v-model="bsmtFinSF1" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div> 
                         </li>
+                        <li>
+                            <p class = "input-info">Enter the total number of rooms above ground, does not include bathrooms</p>
+                            <div class="form-group m-3">
+                                <input v-model="totRmsAbvGrd" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Enter an integer.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <p class = "input-info">Enter the capacity of the garage in number of cars (enter 0 if you don't have)</p>
+                            <div class="form-group m-3">
+                                <input v-model="garageCars" type="number" min = 0 class="form-control" id="uname" placeholder="" name="uname" required>
+                                <div class="valid-feedback">Field is filled.</div>
+                                <div class="invalid-feedback">Enter an integer.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <p class = "input-info">Enter the year built (format: XXXX)</p>
+                            <div class="form-group m-3">
+                                <input v-model="yearBuilt" type="number" min = "1000" :max="new Date().getFullYear()" class="form-control" id="uname" placeholder="" name="uname" required>
 
-                        <li>
-                            <div class="form-group m-3">
-                                <input v-model="totRmsAbvGrd" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the total number of rooms above ground, does not include bathrooms" name="uname" required>
                                 <div class="valid-feedback">Field is filled.</div>
                                 <div class="invalid-feedback">Enter an integer.</div>
                             </div>
                         </li>
-                        <li>
-                            <div class="form-group m-3">
-                                <input v-model="garageCars" type="number" min = 0 class="form-control" id="uname" placeholder="Enter the capacity of the garage in number of cars (enter 0 if you don't have)" name="uname" required>
-                                <div class="valid-feedback">Field is filled.</div>
-                                <div class="invalid-feedback">Enter an integer.</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-group m-3">
-                                <input v-model="yearBuilt" type="number" min = "1000" :max="new Date().getFullYear()" class="form-control" id="uname" placeholder="Enter the year built (format: XXXX)" name="uname" required>
-
-                                <div class="valid-feedback">Field is filled.</div>
-                                <div class="invalid-feedback">Enter an integer.</div>
-                            </div>
-                        </li>
+                        <br>
                         <li>
                             <div class="form-group m-3">
                                 <select class="drop-down-own" v-model="overallQual" aria-label="Default select example" required>
@@ -88,6 +95,7 @@
                                 <div class="invalid-feedback">Please fill out this field.</div>               
                             </div>
                         </li>
+                         <br>
                         <li>
                             <div class="form-group m-3">
                                 <select class="drop-down-own" v-model="landContour" aria-label="Default select example" required>
@@ -102,7 +110,6 @@
                             </div>
                         </li>
                     </ol>
- 
                     <button type="submit" class="btn btn-secondary m-4">Submit</button>
                     <button type="reset" class="btn btn-secondary m-4" @click="emptyVariables">Reset</button>
 
@@ -118,7 +125,7 @@
                         <div class="row">
 
                             <div class="col-12 col-md-4 mt-5 p-4">
-                                <div class="card" style="width: 100%; background-color: white;">
+                                <div class="card shadow-sm" style="width: 100%; background-color: white;">
                                 <div class="card-body">
                                     <h4 class="card-title">The predicted house price:</h4>
                                     <h6 class="card-subtitle mb-2 text-muted">Accuray of 88 %</h6>
@@ -126,7 +133,6 @@
                                 </div>
                                 </div>
                             </div>
-
                             <div class="col-12 col-md-8 mt-4">
                                 <div class="row">
 
@@ -138,6 +144,21 @@
                                     <div class="col-12 col-md-4 mt-5"></div>
                                 </div>
                             </div>
+
+                        <div class="row">
+                            <div class="col-12 mt-5 p-5">
+                                <h4>Overheated house prices?</h4>
+                                <p class = "input-info">No one predicted it, the pandemic caused a run on housing in US, unlike any other. Space became a major asset, propelled by very attractive mortgage rates, which set more than a dozen record lows. This years buyers have to deal with the worst supply situation on record, there were nearly half as many homes for sale at the end of February compared with a year earlier.<br><br>One year later after the Covid-19 outbreak  home prices are overheated, mortgage rates are rising, the supply of homes for sale is anemic and consumer confidence in the housing market is falling. Prices were up more than 10 % in January compared to last year, the rate that the prices are rising is the fastest since 2006.</p>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 mt-5">
+                                <img src="src\assets\usaHousemarket.png" class="img-fluid" alt="Responsive image">
+                            </div>
+                        </div>
+
                         </div>
                     </div>
 
@@ -168,6 +189,7 @@
 
                 canvas: "",
                 chart: "",
+                previousEntry: ""
             }
         },
 
@@ -193,8 +215,8 @@
                             {
                                 label: 'Predicted price',
                                 data: [0],
-                                backgroundColor: ['blue'],
-                                borderColor: ['black'],
+                                backgroundColor: ['#FFCAD4'],
+                                borderColor: ['#F4ACB7'],
                                 borderWidth: 2
                             }  
                         ],
@@ -261,7 +283,6 @@
                     OverallQual:this.overallQual
                 }      
                 
-                console.log(dataToPredict)
                 let prediction = 0
 
                 try{
@@ -277,26 +298,19 @@
 
 
                 console.log("Prediction:", prediction)
+                console.log("dataToPredict:", dataToPredict)
+                console.log("Previous entry before comparison", this.$store.state.previousEntry)
+                console.log("Entry comparison before if",JSON.stringify(dataToPredict) === JSON.stringify(this.$store.state.previousEntry))
+                
 
-                if(prediction > 0){
+                this.displayPrediction(prediction)
+
+                // Compare the current input to the previous input that led to storage in db
+                let prevoiusVsCurrent = JSON.stringify(dataToPredict) === JSON.stringify(this.$store.state.previousEntry)
+
+
+                if(prediction > 0 && !prevoiusVsCurrent){
                     
-                    // Set global variable and store prediction
-        
-                    let priceFormat =  new Intl.NumberFormat('en-US',
-                        { style: 'currency', currency: 'USD',
-                            minimumFractionDigits: 0 });
-        
-                    this.price = priceFormat.format(parseInt(prediction))
-        
-                    this.$store.commit('setPrediction', prediction)
-                    console.log("Prediction in store", this.$store.state.prediction)
-
-                    let chartDataset = this.chart.data.datasets[0]
-                    chartDataset.data[0] = prediction
-                    this.chart.update()
-        
-                    // To database
-        
                     let dataToDatabase = {
                         TotRmsAbvGrd: this.totRmsAbvGrd,
                         YearBuilt: this.yearBuilt,
@@ -326,10 +340,20 @@
                         console.log("Before:",this.$store.state.predictions)
                         this.$store.commit('appendPrediction', dataFromDatabase)
                         console.log("After:", this.$store.state.predictions)
+
+                        // Copy last entry in database, deep copy, for later comparison
+
+                        let previousEntry = JSON.parse(JSON.stringify(dataToPredict));
+                        this.$store.commit('setPreviousEntry', previousEntry)
+
                     }
                     catch(err) {
                         this.price = "Error, the prediction data wasn't added to the data base!"
                     }
+                }
+                else if (prevoiusVsCurrent){
+                    this.price = this.price
+
                 }
                 else{
                     this.price = "Something went wrong try again!"
@@ -340,6 +364,25 @@
             scrollToResult(){
                 let resultEl = document.getElementById("result");
                 resultEl.scrollIntoView();
+            },
+            displayPrediction(prediction){
+
+                // Set global variable and store prediction
+    
+                let priceFormat =  new Intl.NumberFormat('en-US',
+                    { style: 'currency', currency: 'USD',
+                        minimumFractionDigits: 0 });
+    
+                this.price = priceFormat.format(parseInt(prediction))
+    
+                this.$store.commit('setPrediction', prediction)
+                console.log("Prediction in store", this.$store.state.prediction)
+
+                // Change the bar chart
+                let chartDataset = this.chart.data.datasets[0]
+                chartDataset.data[0] = prediction
+                this.chart.update()            
+
             },
             emptyVariables(){
                 
@@ -361,8 +404,23 @@
 </script>
 
 <style scope>
+  
+    /* Remove spinners */
+    
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
     .data-input-col {
-        background-color: rgb(199, 206, 204);
+        background-color: #dfe4ea;
     }
     .display-prediction-col {
         background-color: white;
@@ -376,13 +434,16 @@
 
     .directives {
         float: left;
+        text-align: left;
         margin-top: 30px;
         margin-bottom: 20px;
+        margin-left: 30px;
     }
 
-    #myChart {
-        /* width: 50%; */
-        /* height:100px; */
+    .input-info {
+        float: left;
+        margin-top: 20px;
+        text-align: left;
     }
 
 </style>

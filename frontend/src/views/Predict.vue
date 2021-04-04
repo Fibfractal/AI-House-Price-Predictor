@@ -168,6 +168,7 @@
 
                 canvas: "",
                 chart: "",
+                previousEntry: ""
             }
         },
 
@@ -261,7 +262,6 @@
                     OverallQual:this.overallQual
                 }      
                 
-                console.log(dataToPredict)
                 let prediction = 0
 
                 try{
@@ -277,26 +277,19 @@
 
 
                 console.log("Prediction:", prediction)
+                console.log("dataToPredict:", dataToPredict)
+                console.log("Previous entry before comparison", this.$store.state.previousEntry)
+                console.log("Entry comparison before if",JSON.stringify(dataToPredict) === JSON.stringify(this.$store.state.previousEntry))
+                
 
-                if(prediction > 0){
+                this.displayPrediction(prediction)
+
+                // Compare the current input to the previous input that led to storage in db
+                let prevoiusVsCurrent = JSON.stringify(dataToPredict) === JSON.stringify(this.$store.state.previousEntry)
+
+
+                if(prediction > 0 && !prevoiusVsCurrent){
                     
-                    // Set global variable and store prediction
-        
-                    let priceFormat =  new Intl.NumberFormat('en-US',
-                        { style: 'currency', currency: 'USD',
-                            minimumFractionDigits: 0 });
-        
-                    this.price = priceFormat.format(parseInt(prediction))
-        
-                    this.$store.commit('setPrediction', prediction)
-                    console.log("Prediction in store", this.$store.state.prediction)
-
-                    let chartDataset = this.chart.data.datasets[0]
-                    chartDataset.data[0] = prediction
-                    this.chart.update()
-        
-                    // To database
-        
                     let dataToDatabase = {
                         TotRmsAbvGrd: this.totRmsAbvGrd,
                         YearBuilt: this.yearBuilt,
@@ -326,16 +319,44 @@
                         console.log("Before:",this.$store.state.predictions)
                         this.$store.commit('appendPrediction', dataFromDatabase)
                         console.log("After:", this.$store.state.predictions)
+
+                        // Copy last entry in database, deep copy, for later comparison
+
+                        let previousEntry = JSON.parse(JSON.stringify(dataToPredict));
+                        this.$store.commit('setPreviousEntry', previousEntry)
+
                     }
                     catch(err) {
                         this.price = "Error, the prediction data wasn't added to the data base!"
                     }
+                }
+                else if (prevoiusVsCurrent){
+                    this.price = this.price
+
                 }
                 else{
                     this.price = "Something went wrong try again!"
                 }
 
             }, 
+            displayPrediction(prediction){
+
+                // Set global variable and store prediction
+    
+                let priceFormat =  new Intl.NumberFormat('en-US',
+                    { style: 'currency', currency: 'USD',
+                        minimumFractionDigits: 0 });
+    
+                this.price = priceFormat.format(parseInt(prediction))
+    
+                this.$store.commit('setPrediction', prediction)
+                console.log("Prediction in store", this.$store.state.prediction)
+
+                // Change the bar chart
+                let chartDataset = this.chart.data.datasets[0]
+                chartDataset.data[0] = prediction
+                this.chart.update()            
+            },
             emptyVariables(){
                 
                 this.totRmsAbvGrd = ''

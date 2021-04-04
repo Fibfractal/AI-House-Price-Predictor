@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-secondary bg-secondary p-4">
-        <img id = "logo" src="src\assets\logo.png" width=60 height=60 class="img-fluid" alt="Responsive image">
+        <img id = "logo" src="src\assets\logo.png" width=50 height=50 class="img-fluid" alt="Responsive image">
         <ul id=ul-items>
             <li class="nav-item">
                 <router-link to='/'>Make a prediction</router-link>

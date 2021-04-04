@@ -147,8 +147,8 @@
 
                         <div class="row">
                             <div class="col-12 mt-5 p-5">
-                                <h4>Where are home prices rising the most?</h4>
-                                <p class = "input-info">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit sit perspiciatis doloribus minima quis natus explicabo consequuntur nulla maxime, nisi eum incidunt illum quos non saepe, voluptatem nobis fugiat qui, rem asperiores autem. Quisquam similique excepturi quibusdam dolor, praesentium modi, obcaecati unde corrupti, odit quaerat reiciendis esse aperiam veniam magni nam in! Sit neque odio laboriosam ipsa commodi officiis deserunt iure recusandae similique fuga saepe, accusantium vitae repellendus pariatur minima deleniti voluptate, enim, totam et eum error dicta magnam dolores? Veniam debitis asperiores quasi perferendis ad assumenda nemo molestiae, corporis, adipisci consequatur nihil possimus cupiditate aliquam quas deserunt nulla minima.</p>
+                                <h4>Overheated house prices?</h4>
+                                <p class = "input-info">No one predicted it, the pandemic caused a run on housing in US, unlike any other. Space became a major asset, propelled by very attractive mortgage rates, which set more than a dozen record lows. This years buyers have to deal with the worst supply situation on record, there were nearly half as many homes for sale at the end of February compared with a year earlier.<br><br>One year later after the Covid-19 outbreak  home prices are overheated, mortgage rates are rising, the supply of homes for sale is anemic and consumer confidence in the housing market is falling. Prices were up more than 10 % in January compared to last year, the rate that the prices are rising is the fastest since 2006.</p>
                             </div>
 
                         </div>

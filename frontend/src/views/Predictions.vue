@@ -23,7 +23,7 @@
                     <option value="TotalBsmtSF">Total basement area</option>
                     <option value="_2ndFlrSF">Second floor area</option>
                     <option value="GrLivArea">Ground living area</option>
-                    <option value="OverallQual">Overall Quality</option>
+                    <option value="OverallQual">Overall quality</option>
                 </select>
           </div>
 
@@ -33,7 +33,7 @@
 
                     <div class="col-12 col-md-2"></div>
                     <div class="col-12 col-md-6 p-4">
-                        <h4 class = "mb-5">Display of Previously Predicted Prices</h4>
+                        <h4 class = "mb-5">Display of previously predicted prices</h4>
 
                         <!-- Canvas -->
                         <canvas id="myChart" height="200"></canvas>
@@ -118,7 +118,7 @@ export default {
                 data: {
                     labels: labarray,
                     datasets: [{
-                        label: 'Predicted Price',
+                        label: 'Predicted price',
                         data: array,
                         backgroundColor: '#FFCAD4',
                         borderColor: '#F4ACB7',
@@ -188,7 +188,7 @@ export default {
                 // The data for our dataset
                 data: {
                     datasets: [{
-                        label: 'Predicted Price',
+                        label: 'Predicted price',
                         data: array,
                         backgroundColor: '#B7E4C7',
                         borderColor: '#95D5B2',

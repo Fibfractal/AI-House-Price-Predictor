@@ -110,7 +110,7 @@
             </div>
                     <div class="col-12 col-md-8 p-4 display-prediction-col">
 
-                        <div class="row">
+                        <div id="result" class="row">
 
                             <img src="src\assets\buildings1.jpg" class="img-fluid" alt="Responsive image">
 
@@ -334,8 +334,13 @@
                 else{
                     this.price = "Something went wrong try again!"
                 }
+                this.scrollToResult();
 
             }, 
+            scrollToResult(){
+                let resultEl = document.getElementById("result");
+                resultEl.scrollIntoView();
+            },
             emptyVariables(){
                 
                 this.totRmsAbvGrd = ''

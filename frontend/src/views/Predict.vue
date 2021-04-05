@@ -1,14 +1,10 @@
 <template>
     <main class="container-fluid">
-        
         <div class="row">
             <div class="col-12 col-md-4 p-4 data-input-col">
-                
                 <h4>Make a prediction</h4>
                 <p class="directives">Fill out ALL the fields in the form below to predict a price of a house </p>
-
                 <form @submit.prevent="predict" class="was-validated">
-
                     <ol>
                         <li>
                             <p class = "input-info">Enter the living area above ground in square feet</p>
@@ -112,26 +108,19 @@
                     </ol>
                     <button type="submit" class="btn btn-secondary m-4">Submit</button>
                     <button type="reset" class="btn btn-secondary m-4" @click="emptyVariables">Reset</button>
-
                 </form>                                
             </div>
                     <div class="col-12 col-md-8 p-4 display-prediction-col">
-
                         <div id="result" class="row">
-
                             <img src="src\assets\buildings1.jpg" class="img-fluid" alt="Responsive image">
-
                         </div>
-
                         <div class="row">
                             <p class="market-info">
                                 This service is based on data from the house market of Ames, Iowa US.
                                 Predictions are only useful in that market.
                             </p>
                         </div>
-
                         <div class="row">
-
                             <div class="col-12 col-md-4 mt-5 p-4">
                                 <div class="card shadow-sm" style="width: 100%; background-color: white;">
                                 <div class="card-body">
@@ -151,32 +140,25 @@
                                     <div class="col-12 col-md-3 mt-5"></div>
                                 </div>
                             </div>
-
                         <div class="row">
                             <div class="col-12 mt-5 p-5">
                                 <h4>Overheated house prices?</h4>
                                 <p class = "input-info">No one predicted it, the pandemic caused a run on housing in US, unlike any other. Space became a major asset, propelled by very attractive mortgage rates, which set more than a dozen record lows. This years buyers have to deal with the worst supply situation on record, there were nearly half as many homes for sale at the end of February compared with a year earlier.<br><br>One year later after the Covid-19 outbreak  home prices are overheated, mortgage rates are rising, the supply of homes for sale is anemic and consumer confidence in the housing market is falling. Prices were up more than 10 % in January compared to last year, the rate that the prices are rising is the fastest since 2006.</p>
                             </div>
-
                         </div>
-
                         <div class="row">
                             <div class="col-12 mt-5">
                                 <img src="src\assets\usaHousemarket.png" class="img-fluid" alt="Responsive image">
                             </div>
                         </div>
-
                         </div>
                     </div>
-
         </div>
     </main>
 </template>
 
 <script>
-
     import Chart from "chart.js";
-
     export default {
 
         data(){
@@ -244,21 +226,6 @@
             },
             async predict(){
 
-                console.log("I am in input control")
-
-                console.log(this.totRmsAbvGrd)
-                console.log(this.yearBuilt)
-                console.log(this.landContour)
-                console.log(this.bsmtFinSF1)
-
-                console.log(this.garageCars)
-                console.log(this._1stFlrSF)
-                console.log(this.totalBsmtSF)
-                console.log(this._2ndFlrSF)
-
-                console.log(this.grLivArea)
-                console.log(this.overallQual)
-
                 // Onehot encoded variable
 
                 let toModel = [0,0,0,0]
@@ -269,8 +236,6 @@
                         toModel[i] = 1
                     }
                 }
-
-                console.log(toModel)
 
                 // To trained model
 
@@ -303,13 +268,6 @@
                     this.price = "Something went wrong try again!"
                 }
 
-
-                console.log("Prediction:", prediction)
-                console.log("dataToPredict:", dataToPredict)
-                console.log("Previous entry before comparison", this.$store.state.previousEntry)
-                console.log("Entry comparison before if",JSON.stringify(dataToPredict) === JSON.stringify(this.$store.state.previousEntry))
-                
-
                 this.displayPrediction(prediction)
 
                 // Compare the current input to the previous input that led to storage in db
@@ -340,13 +298,10 @@
                         })
             
                         let dataFromDatabase = await result.json()
-                        console.log("from database", dataFromDatabase)
             
                         // Add the new predict to store predictions
             
-                        console.log("Before:",this.$store.state.predictions)
                         this.$store.commit('appendPrediction', dataFromDatabase)
-                        console.log("After:", this.$store.state.predictions)
 
                         // Copy last entry in database, deep copy, for later comparison
 
@@ -383,9 +338,9 @@
                 this.price = priceFormat.format(parseInt(prediction))
     
                 this.$store.commit('setPrediction', prediction)
-                console.log("Prediction in store", this.$store.state.prediction)
 
                 // Change the bar chart
+                
                 let chartDataset = this.chart.data.datasets[0]
                 chartDataset.data[0] = prediction
                 this.chart.update()            

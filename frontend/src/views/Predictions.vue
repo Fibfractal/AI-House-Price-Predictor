@@ -84,9 +84,7 @@ export default {
     mounted(){
         let canvas = document.getElementById("myChart");
         let ctx = canvas.getContext("2d");
-        this.canvas = ctx;
-        //this.createPriceArray();
-        
+        this.canvas = ctx;        
     },
 
     methods: {
@@ -95,19 +93,30 @@ export default {
             // Create an array with only the predicted prices
             let array = []
             let labarray = []
-            
+        
+
             for (let i = 0; i < this.predictions.length; i++){
                 let yvalue = this.predictions[i].PredictedPrice
                 
                 // Array that contains Predicted Price for all predictions done
                 array.push(yvalue); 
-                
-                // Labels array needed for Line Chart - counted from 1 up for number of predictions 
+            }
+
+            //If predictions.length is more than 50 - then we only want to show the 50 latest prediction
+            if(array.length > 50){
+                array = array.slice(-50)
+            }
+           
+            // Labels array needed for Line Chart - counted from 1 up for number of predictions that we show
+            for (let i = 0; i < array.length; i++){
                 labarray.push(i+1);
             }
-        this.create1DChart(array,labarray)
+
+            this.create1DChart(array,labarray)
 
         },
+
+       
 
         create1DChart(array, labarray) {
             

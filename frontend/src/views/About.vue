@@ -19,13 +19,19 @@
               <div class="row">
                 <div class="col-12 col-md-1"></div>
                 <div class="col-12 col-md-10 ">
-                  <h4>About the service</h4>
-                  <p class = "input-info">We use a AI model to make predictions of house prices based on a number of input values, as a part of a school project. <br> On our test data the model has an accuracy of 88%.
+                  <div class="row">
+                    <h4>About the service</h4>
+                    <p class = "input-info">We use a AI model to make predictions of house prices based on a number of input values, as a part of a school project. <br> On our test data the model has an accuracy of 88%.
                   </p>
-                  <p class = "input-info">The model is trained on data from a specific geographic area ( Ames, Iowa US), and may not project a fair picture of the value of homes in your area.</p>
-                  <h4>Disclaimer - At your own risk</h4>
-                  <p class = "input-info">We do not make any warrenties about the completeness, reliability or accuracy of this information. <strong> Any action you take upon the information on this website is strictly at your own risk</strong>, and web will not be liable for any losses and damages in connection with the use of our website.
-                  </p>
+                  </div>
+                  <div class="row">
+                    <p class = "input-info">The model is trained on data from a specific geographic area (Ames, Iowa US), and may not project a fair picture of the value of homes in your area.</p>
+                  </div>
+                  <div class="row">
+                    <h4 class = "input-info">Disclaimer - At your own risk</h4>
+                    <p class = "input-info">We do not make any warrenties about the completeness, reliability or accuracy of this information. <strong> Any action you take upon the information on this website is strictly at your own risk</strong>, and web will not be liable for any losses and damages in connection with the use of our website.
+                    </p>
+                  </div>
                 </div>
                 <div class="col-12 col-md-1"></div>
             </div>

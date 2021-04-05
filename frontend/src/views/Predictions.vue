@@ -23,7 +23,7 @@
                     <option value="TotalBsmtSF">Total basement area</option>
                     <option value="_2ndFlrSF">Second floor area</option>
                     <option value="GrLivArea">Ground living area</option>
-                    <option value="OverallQual">Overall Quality</option>
+                    <option value="OverallQual">Overall quality</option>
                 </select>
           </div>
 
@@ -33,7 +33,7 @@
 
                     <div class="col-12 col-md-2"></div>
                     <div class="col-12 col-md-6 p-4">
-                        <h4 class = "mb-5">Display of Previously Predicted Prices</h4>
+                        <h4 class = "mb-5">Display of previously predicted prices</h4>
 
                         <!-- Canvas -->
                         <canvas id="myChart" height="200"></canvas>
@@ -118,7 +118,7 @@ export default {
                 data: {
                     labels: labarray,
                     datasets: [{
-                        label: 'Predicted Price',
+                        label: 'Predicted price',
                         data: array,
                         backgroundColor: '#FFCAD4',
                         borderColor: '#F4ACB7',
@@ -146,7 +146,8 @@ export default {
     
         prepdata(){
             let choice = this.value;
-            let array = []
+            let array = [];
+            let haveLines = true;
             if (choice != 'None'){
                 for (let i = 0; i < this.predictions.length; i++){
                     for (let key in this.predictions[i]) {
@@ -166,13 +167,18 @@ export default {
                     }
                 }; 
 
+                // Some options look better without lines in the graph
+                if (choice == "TotRmsAbvGrd" || choice == "GarageCars" || choice == "_2ndFlrSF" ){
+                    haveLines = false;
+                }
+
                 // Resorted the array so that the x-values comes in ascending order
                 // This to insure the best possable result for the graph generated 
                 array.sort((a,b) => {
                     return a.x - b.x;
                 });
 
-                this.create2DChart(array)
+                this.create2DChart(array,haveLines)
             }
             else{
                 this.createPriceArray()
@@ -180,7 +186,7 @@ export default {
         },
 
         
-        create2DChart(array) {
+        create2DChart(array,haveLines) {
             this.chart = new Chart(this.canvas, {
                 // Creates a scatter chart
                 type: "scatter",
@@ -188,12 +194,12 @@ export default {
                 // The data for our dataset
                 data: {
                     datasets: [{
-                        label: 'Predicted Price',
+                        label: 'Predicted price',
                         data: array,
                         backgroundColor: '#B7E4C7',
                         borderColor: '#95D5B2',
                         borderWidth: 2,
-                        showLine: true,
+                        showLine: haveLines,
                         lineTension: 0,
                     }]
                 },

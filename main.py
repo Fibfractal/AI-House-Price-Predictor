@@ -1,6 +1,7 @@
 from sanic import Sanic, response as res
 from database import getAllPredictions, createPrediction
 from xgboost_regression_model import predict, train_model
+import os
 
 train_model()
 app = Sanic(__name__)
@@ -31,4 +32,4 @@ async def post_prediction(req):
 
 
 if __name__ == "__main__":
-    app.run(port = 5000)
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))

@@ -4,8 +4,8 @@
           <div class="col-12 col-md-4 p-4 left-lg-col">
             <div class="row">
                 <div class="col-12 col-md-2"></div>
-                  <div class="col-12 col-md-8">
-                    <div id="carouselExampleSlidesOnly1" class="carousel slide" data-bs-ride="carousel" data-bs-interval=3000>
+                  <div class="col-12 col-md-8">             
+                    <div id="carousel1" class="carousel slide" data-bs-ride="carousel" data-bs-interval=4000>
                       <div class="carousel-inner">
                         <div class="carousel-item active">
                           <img src="src\assets\jacques-bopp-wtzOhxEX4WU-unsplash-500-296.jpg" class="d-block w-100" alt="A braun, wood house">
@@ -21,8 +21,9 @@
                         </div>
                       </div>
                     </div>
-                    <p></p>
-                    <div id="carouselExampleSlidesOnly2" class="carousel slide" data-bs-ride="carousel" data-bs-interval=2500>
+                    <br>
+                    <br>
+                    <div id="carouse2" class="carousel slide" data-bs-ride="carousel" data-bs-interval=5000>
                       <div class="carousel-inner">
                         <div class="carousel-item active">
                           <img src="src\assets\roger-starnes-sr-MINQCvKfwL4-unsplash-500-296.jpg" class="d-block w-100" alt="A blue house">
@@ -47,9 +48,9 @@
                 <div class="col-12 col-md-1"></div>
                 <div class="col-12 col-md-10 ">
                   <h4>About the service</h4>
-                  <p class = "input-info">We use a AI model to make predictions of house prices based on a number of input values, as a part of a school project. On our test data the model has an accuracy of 88 %.
+                  <p class = "input-info">We use a AI model to make predictions of house prices based on a number of input values, as a part of a school project. <br> On our test data the model has an accuracy of 88 %.
                   </p>
-                  <p class = "input-info">The model is trained on data from a specific geographic area, and may not project a fair picture of the value of homes in your area.</p>
+                  <p class = "input-info">The model is trained on data from a specific geographic area ( Ames, Iowa US), and may not project a fair picture of the value of homes in your area.</p>
                   <h4>Disclaimer - At your own risk</h4>
                   <p class = "input-info">We do not make any warrenties about the completeness, reliability or accuracy of this information. <strong> Any action you take upon the information on this website is strictly at your own risk</strong>, and web will not be liable for any losses and damages in connection with the use of our website.
                   </p>
@@ -64,11 +65,12 @@
 
 <script>
 
-  export default {
-     
-  }
-  
+export default {
+
+}
+ 
 </script>
+
 
 <style scope>
   .input-info {

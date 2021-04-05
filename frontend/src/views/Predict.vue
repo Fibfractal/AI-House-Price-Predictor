@@ -143,13 +143,12 @@
                             </div>
                             <div class="col-12 col-md-8 mt-4">
                                 <div class="row">
-
+                                    <div class="col-12 col-md-1 mt-5"></div>
                                     <!-- canvas -->
                                     <div class="col-12 col-md-8 mt-5">
                                         <canvas id="myChart" height="200"></canvas>
                                     </div>
-
-                                    <div class="col-12 col-md-4 mt-5"></div>
+                                    <div class="col-12 col-md-3 mt-5"></div>
                                 </div>
                             </div>
 

@@ -122,6 +122,14 @@
                             <img src="src\assets\buildings1.jpg" class="img-fluid" alt="Responsive image">
 
                         </div>
+
+                        <div class="row">
+                            <p class="market-info">
+                                This service is based on data from the house market of Ames, Iowa US.
+                                Predictions are only useful in that market.
+                            </p>
+                        </div>
+
                         <div class="row">
 
                             <div class="col-12 col-md-4 mt-5 p-4">
@@ -443,6 +451,12 @@
     .input-info {
         float: left;
         margin-top: 20px;
+        text-align: left;
+    }
+
+    .market-info {
+        float: left;
+        padding: 30px;
         text-align: left;
     }
 

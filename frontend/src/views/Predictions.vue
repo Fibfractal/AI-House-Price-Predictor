@@ -196,6 +196,9 @@ export default {
 
         
         create2DChart(array,haveLines) {
+
+            this.chart.destroy()
+
             this.chart = new Chart(this.canvas, {
                 // Creates a scatter chart
                 type: "scatter",

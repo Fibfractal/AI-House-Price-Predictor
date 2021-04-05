@@ -28,8 +28,8 @@
                     <p class = "input-info">The model is trained on data from a specific geographic area (Ames, Iowa US), and may not project a fair picture of the value of homes in your area.</p>
                   </div>
                   <div class="row">
-                    <h4 class = "input-info">Disclaimer - At your own risk</h4>
-                    <p class = "input-info">We do not make any warrenties about the completeness, reliability or accuracy of this information. <strong> Any action you take upon the information on this website is strictly at your own risk</strong>, and web will not be liable for any losses and damages in connection with the use of our website.
+                    <h4>Disclaimer - At your own risk</h4>
+                    <p class = "input-info">We do not make any warrenties about the completeness, reliability or accuracy of this information. <strong> Any action you take upon the information on this website is strictly at your own risk</strong>, and we will not be liable for any losses and damages in connection with the use of our website.
                     </p>
                   </div>
                 </div>

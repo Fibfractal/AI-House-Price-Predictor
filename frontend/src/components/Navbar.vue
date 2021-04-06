@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-secondary bg-secondary p-4">
 
         <div class="img__wrap">
-            <img id = "logo" src="src\assets\logo.png" width=50 height=50 class="img-fluid" alt="Responsive image">
+            <img id = "logo" src="..\assets\logo.png" width=50 height=50 class="img-fluid" alt="Responsive image">
             <p class="img__description">Fast predictions</p>
         </div>
 

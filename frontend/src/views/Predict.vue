@@ -112,7 +112,7 @@
             </div>
                     <div class="col-12 col-md-8 p-4 display-prediction-col">
                         <div id="result" class="row">
-                            <img src="src\assets\buildings1.jpg" class="img-fluid" alt="Responsive image">
+                            <img src="..\assets\buildings1.jpg" class="img-fluid" alt="Responsive image">
                         </div>
                         <div class="row">
                             <p class="market-info">
@@ -148,7 +148,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12 mt-5">
-                                <img src="src\assets\usaHousemarket.png" class="img-fluid" alt="Responsive image">
+                                <img src="..\assets\usaHousemarket.png" class="img-fluid" alt="Responsive image">
                             </div>
                         </div>
                         </div>

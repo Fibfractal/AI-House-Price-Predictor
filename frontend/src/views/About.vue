@@ -5,11 +5,11 @@
             <div class="row">
                 <div class="col-12 col-md-2"></div>
                   <div class="col-12 col-md-8"> 
-                    <img src="src\assets\jacques-bopp-wtzOhxEX4WU-unsplash-500-296.jpg" class="d-block w-100 rounded" alt="A braun, wood house">
+                    <img src="..\assets\jacques-bopp-wtzOhxEX4WU-unsplash-500-296.jpg" class="d-block w-100 rounded" alt="A braun, wood house">
                     <br>
-                    <img src="src\assets\todd-kent-178j8tJrNlc-unsplash-500-296.jpg" class="d-block w-100 rounded" alt="A house with a porch">
+                    <img src="..\assets\todd-kent-178j8tJrNlc-unsplash-500-296.jpg" class="d-block w-100 rounded" alt="A house with a porch">
                     <br>
-                    <img src="src\assets\roger-starnes-sr-MINQCvKfwL4-unsplash-500-296.jpg" class="d-block w-100 rounded" alt="A blue house">
+                    <img src="..\assets\roger-starnes-sr-MINQCvKfwL4-unsplash-500-296.jpg" class="d-block w-100 rounded" alt="A blue house">
                     
                   </div>
                 </div>

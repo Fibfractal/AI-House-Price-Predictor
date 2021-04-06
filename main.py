@@ -3,6 +3,7 @@ from sanic.exceptions import NotFound
 from database import getAllPredictions, createPrediction
 from xgboost_regression_model import predict, train_model
 import os
+from threading import Thread
 
 app = Sanic(__name__)
 
@@ -39,5 +40,8 @@ async def ignore_404s(request, exception):
     return await res.file('./frontend/dist/index.html')
 
 if __name__ == "__main__":
+    
+    th = Thread(target=train_model) 
+    th.start()
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
-    train_model()
+    th.join()

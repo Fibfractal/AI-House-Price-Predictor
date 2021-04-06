@@ -1,4 +1,5 @@
 from sanic import Sanic, response as res
+from sanic.exceptions import NotFound
 from database import getAllPredictions, createPrediction
 from xgboost_regression_model import predict, train_model
 import os
@@ -30,6 +31,13 @@ async def post_prediction(req):
     prediction['Id'] = await createPrediction(prediction)
     return res.json(prediction)
 
+
+# enable frontend to be served from root
+app.static('/', './frontend/dist')
+
+@app.exception(NotFound)
+async def ignore_404s(request, exception):
+    return await res.file('./frontend/dist/index.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
